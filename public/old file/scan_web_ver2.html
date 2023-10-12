@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website vulnerability checker Program</title>
+    <link rel="stylesheet" href="/css/scan_style_web_ver.css">
+    <!-- Bootstrap CSS from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <!-- Boxicons CDN Link -->
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg">
+        <div class="sidebar">
+            <button type="button" class="btn search_btn">Search</button>
+            <button type="button" class="btn about_btn">About</button>
+        </div>
+        <section class="home-section">
+            <div class="head">
+                <img src="/photo/Untitled-2.gif" alt="">
+                <p>API by OWASP</p>
+            </div>
+            <div class="detial">
+                <form action="" class="form">
+                    <div class="grid-container">
+                        <div class="input-field form-floating mb-3">
+                            <input type="text" class="form-control linkToScan" id="floatingInput"
+                                placeholder="www.example.com">
+                            <label for="floatingInput">Website URL</label>
+                        </div>
+                        <div class="submit-button">
+                            <button type="button" class="btn btn-outline-primary" id="scanvulbtn">Scan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <div class="showtest">
+            <div id="scanvul"></div>
+            <div id="Certificate"></div>
+            <div id="Location"></div>
+            <div id="WebserverEnginehttp">WebserverEnginehttp</div>
+            <div id="serverHTTP">serverHttp</div>
+        </div>
+
+        <div id="show-result">
+            <div>scan result</div>
+            <div id="Certificate_icon">Certificate_icon</div>
+            <div id="dayremaining">dayremaining</div>
+            <div id="countryServer">countryServer</div>
+            <div id="serverHTTP">serverHTTP</div>
+            <div id="Web_Vulnerability_boxtext">Web_Vulnerability_boxtext</div>
+        </div>
+
+        <div class="footer">
+            <div class="dev">
+                <h4>
+                    Developer
+                </h4>
+                <div class="dev_detail">
+                    <div class="dev1">
+                        Thanuson Sonthimoon
+                    </div>
+                    <div class="dev2">
+                        Rathasat Peerwong
+                    </div>
+                </div>
+            </div>
+            <div class="advisor">
+                <h4>Advisor</h4>
+                <div class="advisor_detail">
+                    Phet Aimtongkham, Ph.D.
+                </div>
+            </div>
+            <div class="kku">
+                <!-- <h4>Information Technology<br>
+                    College of Computer Science <br>
+                    Khon Kaen University</h4> -->
+                <img src="/photo/Computing_KKU.svg.png" alt="">
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            fetch('../python/zap_report.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('content').innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+
+    <!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script src="./js/scanvul.js"></script>
+
+</body>
+
+
+</html>

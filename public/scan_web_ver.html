@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Website vulnerability checker</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <!-- Boxicons CDN Link -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+   </head>
+   <style>
+        body {
+            background-color: #ffffff;
+        }
+        @import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
+        .head img{
+            width: 50%;
+            padding-top: 50px;
+        }
+        .home-section .head{
+            text-align: center;
+            color: white;
+        }
+        .home-section{
+            display: grid;
+            grid-template-rows: name search;
+            height: 600px;
+            padding-top: 100px;
+            background-color: #143B5B;
+        }
+
+
+        .detial {
+            display: flex;
+            justify-content: center;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            padding-bottom: 100px;
+            width: 900px;
+            height: 50px;
+        }
+        .grid-container input{
+            border-radius: 20px 0px 0px 20px;
+        }
+        .grid-container button{
+            border-radius: 0px 18px 18px 0px;
+            height: 58px;
+            width: 90px;
+            color: white;
+            background-color:#007bff ;
+            font-weight: bold;
+        }
+        .input-field input {
+            width: 100%;
+        }
+        .head .name{
+            font-family: "Archivo Black", sans-serif;
+            font-size: 40px;
+        }
+        .head p{
+            font-family: "Archivo", sans-serif;
+            font-size: 25px;
+        }
+        .sidebar{
+            text-align: right;
+            padding-top: 10px;
+            padding-right: 10px;
+            background-color: rgba(181, 243, 249);
+            height: 60px;
+            box-shadow: 0px 10px 30px rgb(181, 243, 249);
+        }
+
+        .sidebar button{
+            font-size: 18px;
+            /* font-weight: bold; */
+            width: 120px;
+        }
+        .sidebar .search_btn{
+            text-align: center;
+        }
+        .sidebar .btn:hover {
+            background-color: #007bff; /* สีพื้นหลังใหม่เมื่อ hover */
+            color: #fff; /* สีข้อความใหม่เมื่อ hover */
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            display: block;
+            margin: 20px auto;
+            position: relative;
+            border: 3px solid #060487;
+            border-radius: 50%;
+            box-sizing: border-box;
+            animation: animloader 2s linear infinite;
+        }
+            .loader::after {
+            content: '';  
+            box-sizing: border-box;
+            width: 6px;
+            height: 24px;
+            background: #060487;
+            transform: rotate(-45deg);
+            position: absolute;
+            bottom: -20px;
+            left: 46px;
+        }
+
+        @keyframes animloader {
+            0% {
+                transform: translate(-10px, -10px);
+            }
+            25% {
+                transform: translate(-10px, 10px);
+            }
+            50% {
+                transform: translate(10px, 10px);
+            }
+            75% {
+                transform: translate(10px, -10px);
+            }
+            100% {
+                transform: translate(-10px, -10px);
+            }
+        }
+        .modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%; /* ทำให้ความสูงของ modal-body เต็มจอ */
+        }
+        .modal-dialog {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* ทำให้สูงเต็มหน้าจอ */
+        }
+
+        /* CSS สำหรับ modal-content */
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ccc; /* ขอบกรอบ */
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .detail-about{
+            width: 900px;
+            padding-top: 30px;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+
+
+
+
+
+
+
+
+    </style>
+<body>
+    <div class="bg">
+        <!-- <div class="sidebar">
+            <button type="button" class="btn search_btn">Search</button>
+            <button type="button" class="btn about_btn">About</button>
+        </div> -->
+        <section class="home-section">
+            <div class="head">
+                <div class="name">Vulnerability Checker</div>
+            </div>
+            <div class="detial">
+                <form action="" class="form">
+                    <div class="grid-container">
+                        <div class="input-field form-floating mb-3">
+                            <input type="text" class="form-control linkToScan" id="urlInput" placeholder="name@example.com">
+                            <label for="floatingInput">Website URL</label>
+                        </div>
+                        <div class="submit-button">
+                            <button type="button" class="btn btn-outline-primary" id="scanvulbtn" onclick="runPythonFile()">Scan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- ก่อนปิด </body> -->
+        <div class="modal" tabindex="-1" role="dialog" id="scanModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Scanning in progress</h5>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Scanning your website...
+                    <span class="loader"></span>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="detail-about">
+            <div class="col1">
+                <h4><b>About Website</b></h4>
+                <p>This Website was created for the purpose of running a website project for vulnerabilities.
+                There is no purpose to compeomise the information of the website in any way.
+                If any error in this program The organizing committee apologizes here.
+                </p>
+            </div>
+            <div class="col2">
+                <h4><b>Why check for vulnerabilities?</b></h4>
+                Checking for vulnerabilities on a website is an essential step in maintaining its security and safeguarding related data. There are several reasons why vulnerability assessment is crucial <br>
+
+<b>1. Preventing Hacks and Attacks:</b> Vulnerabilities on a website can provide opportunities for malicious individuals to access critical data or harm the website. Checking for vulnerabilities helps prevent various attacks like SQL Injection, Cross-Site Scripting (XSS), and others.
+
+<br><b>2. Maintaining Trust and Credibility:</b> Knowing that a website is free from vulnerabilities instills confidence in users regarding its security and the safety of their data. This is vital for customer retention and building a positive reputation.
+
+<br><b>3. Best Practices:</b> Vulnerability assessment is an integral part of following best practices in web security. It may be a requirement or a security guideline for various organizations, such as Framework Security Guidelines or Payment Card Industry Data Security Standard (PCI DSS), as well as other security certifications.
+
+<br><b>4. Saving Time and Costs:</b> Detecting vulnerabilities early in the development process reduces complexity and costs associated with fixing them after deployment. Vulnerabilities discovered during testing and development are often easier to address.
+
+<br><b>5. Data Protection:</b> Checking for vulnerabilities helps protect sensitive data and user privacy, which is crucial for websites that store personal or confidential information.
+
+<br><br>Vulnerability assessment should be an ongoing process during both development and website operation. This may involve using vulnerability scanning tools and regularly reviewing code to ensure that the website remains secure and resilient against potential threats.
+            </div>
+            <div class="col3">
+                
+            </div>
+        </div>
+
+        <!-- <div class="footer">
+            <div class="ft1">
+                <div class="ft1_d">
+                    Copyrigth @ 2019-2020 OWASP
+                </div>
+            </div>
+            <div class="ft2">
+                <div class="ft3_d">
+                    Privacy Policy 
+                </div>
+            </div>
+            <div class="ft3">
+                <div class="ft3_d">
+                    Terms and conditions
+                </div>
+            </div>
+            <div class="ft4">
+                <div class="ft4_d">
+                    Contrack
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <a href="report.html">Report HTML</a>
+    <script>
+        function runPythonFile() {
+        $('#scanModal').modal('show'); // เปิด Modal
+        // ทำการสแกนหรือประมวลผลอื่น ๆ ที่ต้องการ
+        }
+
+    </script>
+    <script src="./js/scanvul.js"></script>
+</body>
+</html>

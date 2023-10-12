@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON to Table</title>
+    <link rel="stylesheet" href="./css/button_style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<style>
+body {
+            background-color: #143B5B;
+}
+@import url('https://fonts.googleapis.com/css?family=Archivo+Black&display=swap');
+.table-bordered {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+.table-bordered th {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: center;
+}
+
+
+.table-bordered td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+}
+.btn-secondary:hover{
+    background-color: red;
+}
+
+/* .certificate{
+    grid-area: cer;
+    text-align: center;
+    padding-top: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+} */
+/* .certificate i{
+    font-size: 50px;
+    color: #e8e8e8;
+    padding-top: 70px;
+} */
+/* .Location{
+    grid-area: location;
+    text-align: center;
+    padding-top: 20px;
+    height: 300px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+} */
+/* .Location i{
+    font-size: 50px;
+    color: #e8e8e8;
+    padding-top: 70px;
+} */
+/* .http{
+    grid-area: http;
+    text-align: center;
+    padding-top: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.19);
+} */
+/* .http i{
+    font-size: 50px;
+    color: #e8e8e8;
+    padding-top: 70px;
+} */
+/* .detail > div {
+    transition: transform 0.3s ease-in-out;
+    transform-origin: top ;
+} */
+
+/* .detail > div:hover {
+    transform: scale(1.1);
+} */
+.results tr td{
+    text-align: left;
+}
+.table_g{
+    width: 1200px;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 150px;
+    
+}
+.head{
+    text-align: center;
+    font-size: 50px;
+    padding-top: 50px;
+    color: #ffffff;
+    font-weight: bold;
+
+}
+.show_detail{
+    width: 600px;
+    height: 100px;
+    color: #ffffff;
+    
+}
+.show_detail {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 25px;
+    width: 1200px;
+    padding-top: 50px;
+    
+
+}
+.show_detail .row{
+    height: 60px;
+    /* font-weight: bold; */
+}
+.col-sm-8{
+    text-align: center;
+
+}
+#detail{
+    background-color: none;
+}
+
+    
+
+
+</style>
+<body>
+    <div class="head">Report Vulnerability</div>
+    <div class="show_detail">
+        <div class="container text-center">
+            <div class="row">
+              <div class="col-sm show_site">
+              </div>
+            </div>
+            <div class="row" id="row2">
+              <div class="col-sm">
+                <div class="certificate">
+                    <i class="bi bi-journal-check"></i>
+                    Certificate<br>
+                    <span id="icon_cer"></span><span class="show_cer" id="dayremaining">Checking</span>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="Location">
+                    <i class="bi bi-geo-alt"></i>
+                    Location<br>
+                    <span id="icon_loc"></span><span id="countryServer">Checking</sapn>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="http">
+                    <i class="bi bi-globe2"></i>
+                    Engine HTTP<br>
+                    <span id="icon_http"></span><span id="serverHTTP">Checking</sapn>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="table_g">
+            <table id="alertTable" class="table table-bordered">
+                <tr>
+                    <th>No.</th>
+                    <th>Vulnerability</th>
+                    <th>Risk</th>
+                    <!-- <th>Confidence</th> -->
+                    <th>Risk Level</th>
+                    <th></th>
+                </tr>
+            </table>   
+    </div>
+    <button id="helpButton"><i class="bi bi-info"></i></button>
+    <div id="popupContainer">
+        <div id="popupContent">
+            <span id="closeButton">&times;</span>
+            <h2>Level of Risk Information</h2>
+            <p><b style="color: red;">High:</b> This is the highest level of severity for vulnerabilities. High-level vulnerabilities are often the most critical and can be exploited by malicious actors or attackers with programming skills to compromise an application or website. Examples include SQL Injection and Remote Code Execution.
+
+                <br><b style="color: orange;">Medium:</b> Medium-level vulnerabilities are less severe than high-level ones but can still be used to launch attacks on applications or websites. The severity may increase if these vulnerabilities are exploited repeatedly. Examples include Cross-Site Scripting (XSS) at the medium level.
+                
+                <br><b style="color: rgb(255, 255, 0);">Low:</b> Low-level vulnerabilities are the least severe and typically not very dangerous to an application or website. However, they should still be addressed when found. Examples include Low-level Information Disclosure.
+                
+                <br><b style="color: blue;">Informational:</b> Informational vulnerabilities have no severity and cannot be used for attacks on applications or websites. They often provide additional information about the application or system that may be useful for testing or security assessment purposes.</p>
+        </div>
+    </div>
+    
+
+    <script src="./js/show_json.js"></script>
+    <script src="./js/button_script.js"></script>
+</body>
+</html>

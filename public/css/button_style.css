@@ -1,0 +1,52 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+#popupContainer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+#popupContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 1200px;
+    top: 50%; /* กำหนดให้อยู่ที่กลางตามแนวดิ่ง */
+    left: 50%; /* กำหนดให้อยู่ที่กลางตามแนวนอน */
+    transform: translate(-50%, -50%); /* ใช้ transform เพื่อช่วยให้ตำแหน่งอยู่ตรงกลางทั้งแนวดิ่งและแนวนอน */
+}
+
+
+#closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+#helpButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #77f6ff;
+    color: #000000;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#helpButton i{
+    font-size: 25px;
+}

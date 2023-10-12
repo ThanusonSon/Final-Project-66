@@ -1,0 +1,40 @@
+/* ตัวอย่างสไตล์ CSS สำหรับตกแต่งรายงาน */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .vulnerability {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  .vulnerability h2 {
+    margin: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .vulnerability p {
+    margin: 5px 0;
+  }
+  
