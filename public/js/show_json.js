@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 const modalContent = document.createElement("div");
                 modalContent.classList.add("modal-content");
-
                 
                 const modalHeader = document.createElement("div");
                 modalHeader.classList.add("modal-header");
@@ -97,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                 const modalBody = document.createElement("div");
                 modalBody.classList.add("modal-body");
+                
 
                 
                 alert.instances.forEach(instance => {
@@ -118,14 +118,26 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (instance.solution == ""){
                         instance.solution = " - "
                     }
-                    count_rick += 1
-                    modalBody.innerHTML += `<p><b>URI:</b> ${instance.uri}</p>
+
+                    if (count_rick == 1){
+                        modalBody.innerHTML += `<p><b>Solution:</b> ${alert.solution.replace(/<p>|<\/p>/g, '')}</p><hr>
+                                            <p><b>URI:</b> ${instance.uri}</p>
                                            <p><b>Method:</b> ${instance.method}</p>
                                            <p><b>Parameter:</b> ${instance.param}</p>
                                            <p><b>Attack:</b> ${instance.attack}</p>
                                            <p><b>Evidence:</b> ${instance.evidence}</p>
-                                           <p><b>Solution:</b> ${alert.solution.replace(/<p>|<\/p>/g, '')}</p>
                                            <hr>`;
+                    }
+                    if(count_rick > 1){
+                        modalBody.innerHTML += `<p><b>URI:</b> ${instance.uri}</p>
+                                            <p><b>Method:</b> ${instance.method}</p>
+                                            <p><b>Parameter:</b> ${instance.param}</p>
+                                            <p><b>Attack:</b> ${instance.attack}</p>
+                                            <p><b>Evidence:</b> ${instance.evidence}</p>
+                                            <hr>`;
+                    }
+                    count_rick += 1
+                    
                 });
                 riskCodeCell.innerHTML = count_rick;
                 riskCodeCell.style.textAlign = "center"
@@ -138,6 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     fetchCertificate(inputUrl);
                     fetchLocation(inputUrl);
                     fetchWebserverEnginehttp(inputUrl);
+                    
                 }
                 
                 // fetchLocation(inputUrl);
@@ -187,14 +200,14 @@ async function fetchCertificate(url) {
             
             show_icon.innerHTML = check
             show_icon.style.color = '#32FF00'
-            show_result.innerText = " " + result_cert +' remaining';
+            show_result.innerText = " " + result_cert +' Day remaining';
             console.log('Client function fetchCertificate Success');
         } else if (certificateResult["valid"] === true && result_cert < 0) {
             //document.getElementsByClassName('show_cer').innerHTML = result_cert + ' Expired'
             // document.getElementById('Certificate_icon').style.color = 'red';
             show_icon.innerHTML = not_check
             show_icon.style.color = "#FF3A00"
-            show_result.innerText = " " + result_cert + 'Expired';
+            show_result.innerText = " " + result_cert + ' Day Expired';
             console.log('Client function fetchCertificate Success');
         } else if (certificateResult["valid"] === false) {
             //document.getElementsByClassName('show_cer').innerHTML = result_cert + ' Fake validate'
@@ -208,7 +221,7 @@ async function fetchCertificate(url) {
             // document.getElementById('Certificate_icon').style.color = 'red';
             show_icon.innerHTML = not_check
             show_icon.style.color = "#FF3A00"
-            show_result.innerText = " " + result_cert + 'Invalid';
+            show_result.innerText = " " + 'Invalid';
             console.log('Client function fetchCertificate Success');
         }
     } catch (error) {
@@ -242,7 +255,8 @@ function fetchLocation(url) {
                 const countryServerElement = document.getElementById("countryServer");
                 // const locationIconElement = document.getElementById("Location_icon");
 
-                countryServerElement.innerHTML = locationResult;
+                countryServerElement.innerHTML = " "+locationResult;
+                flags_country(locationResult);
                 // locationIconElement.style.color = 'green';
             })
             .catch(error => {
@@ -320,5 +334,65 @@ function fetchWebserverEnginehttp(url) {
         // engineHTTPElement.style.color = "red";
         serverHTTPElement.innerText = 'An error occurred while making the request.';
     }
+}
+
+function flags_country(country_server){
+    // สร้าง URL ของ API
+const apiUrl = 'https://restcountries.com/v3.1/all?fields=name,flags';
+icon_loc = document.getElementById('icon_loc');
+status_icon = document.getElementById("status");
+const check = '<i class="bi bi-check-circle-fill"></i>';
+const danger = '<i class="bi bi-exclamation-circle-fill"></i>';
+console.log("fun flags = "+country_server)
+
+fetch(apiUrl)
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('ไม่สามารถดึงข้อมูลได้');
+    }
+  })
+  .then(data => {
+    data.forEach(country => {
+      const name = country.name ;
+      const flag = country.flags ;
+      if (country_server == name.common || country_server == name.official){
+        if (country_server !=  "Russia"||
+        country_server !="Russian Federation"||
+        country_server !="China"||
+        country_server !="People's Republic of China"||
+        country_server !="North Korea"||
+        country_server !="Democratic People's Republic of Korea"||
+        country_server !="Iran"||
+        country_server !="Islamic Republic of Iran"||
+        country_server !="India"||
+        country_server !="Republic of India"){
+            icon_loc.innerHTML = '<img src="'+flag.svg+'"  width="50" height="30">';
+            status_icon.innerHTML = check + " ";
+            status_icon.style.color = "#32FF00";
+        }if(country_server ==  "Russia"||
+        country_server =="Russian Federation"||
+        country_server =="China"||
+        country_server =="People's Republic of China"||
+        country_server =="North Korea"||
+        country_server =="Democratic People's Republic of Korea"||
+        country_server =="Iran"||
+        country_server =="Islamic Republic of Iran"||
+        country_server =="India"||
+        country_server =="Republic of India"){
+            icon_loc.innerHTML = '<img src="'+flag.svg+'"  width="50" height="30">';
+            status_icon.innerHTML = danger + " ";
+            status_icon.style.color = "#FF3A00";
+        }
+      }
+      
+      
+    });
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
 }
 
