@@ -12,31 +12,31 @@ def fix_url(url):
     return url
 
 def run_zap_scan(url):
-    # กำหนดค่าพารามิเตอร์สำหรับเชื่อมต่อกับ OWASP ZAP API
     # zap = ZAPv2(apikey='n6a665p7i15p0f0vgbj18l5j4q', proxies={'http': 'http://34.87.79.43:8090', 'https': 'http://34.87.79.43:8090'})
-    zap = ZAPv2(apikey='64fd37gohv4ttupf2rqh7jg877', proxies={'http': '2b1gn7rh-8090.asse.devtunnels.ms', 'https': '2b1gn7rh-8090.asse.devtunnels.ms'})
+    zap = ZAPv2(apikey='2qvmoqf5sm9njkdjlgt3re0h5c', proxies={'http': 'http://localhost:8090', 'https': 'http://localhost:8090'})
 
     try:
-        # เปิดหน้าเว็บที่ต้องการทดสอบ
+       
         print('Accessing target website...')
-        # target_url = 'http://www.google.com'  # แทนที่ด้วย URL ของเว็บไซต์ที่ต้องการทดสอบ
-        target_url = url
+        
+        target_url = url 
+
         zap.urlopen(target_url)
 
-        # Spider the website
+        
         print('Spidering the website...')
         zap.spider.scan(target_url)
         while int(zap.spider.status()) < 100:
-            # Wait for the spidering to complete
+            
             time.sleep(5)
 
         print('Starting the active scan...')
         zap.ascan.scan(target_url)
         while int(zap.ascan.status()) < 100:
-            # Wait for the active scan to complete
+           
             time.sleep(5)
 
-        # แสดงรายงานการสแกน
+        
         print('Generating the scan report...')
         # report_html = zap.core.htmlreport()
         report_json = json.loads(zap.core.jsonreport()) 
@@ -53,11 +53,11 @@ def run_zap_scan(url):
             alerts_summary_data = None
             print('No alertsSummary data found in the report.')
 
-        # บันทึกรายงานในไฟล์
-        report_file_name = './public/python/zap_report.json'  # ชื่อไฟล์ที่ต้องการบันทึกรายงาน
-        # with open(report_file_name, 'w', encoding='utf-8') as report_file:
-        #     report_file.write(report_html)
-        # print(f'Scan report saved to: {report_file_name}')
+       
+        report_file_name = './public/python/zap_report.json'  
+        with open(report_file_name, 'w', encoding='utf-8') as report_file:
+            report_file.write(report_html)
+        print(f'Scan report saved to: {report_file_name}')
         with open(report_file_name, 'w', encoding='utf-8') as report_file:
             scan_report = {
                 'site': target_url,
