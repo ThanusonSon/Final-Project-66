@@ -13,7 +13,7 @@ def fix_url(url):
 
 def run_zap_scan(url):
     # zap = ZAPv2(apikey='n6a665p7i15p0f0vgbj18l5j4q', proxies={'http': 'http://34.87.79.43:8090', 'https': 'http://34.87.79.43:8090'})
-    zap = ZAPv2(apikey='2qvmoqf5sm9njkdjlgt3re0h5c', proxies={'http': 'http://localhost:8090', 'https': 'http://localhost:8090'})
+    zap = ZAPv2(apikey='ajkvq55433snu8ihvhrlfflmrn', proxies={'http': 'http://34.87.79.43:8080', 'https': 'http://34.87.79.43:8080'})
 
     try:
        
@@ -55,9 +55,9 @@ def run_zap_scan(url):
 
        
         report_file_name = './public/python/zap_report.json'  
-        with open(report_file_name, 'w', encoding='utf-8') as report_file:
-            report_file.write(report_html)
-        print(f'Scan report saved to: {report_file_name}')
+        # with open(report_file_name, 'w', encoding='utf-8') as report_file:
+        #     report_file.write(report_json)
+        # print(f'Scan report saved to: {report_file_name}')
         with open(report_file_name, 'w', encoding='utf-8') as report_file:
             scan_report = {
                 'site': target_url,
@@ -68,7 +68,7 @@ def run_zap_scan(url):
             json.dump(scan_report, report_file, indent=4) 
         print(f'Scan report saved to: {report_file_name}')
 
-        file = 'http://localhost:5500/public/report.html'
+        file = 'http://localhost:3000/report.html'
         # public\report.html
         # C:\Users\ratha\Downloads\vulnerability_web\public\report.html
         browser_path = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
