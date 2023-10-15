@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
             const alertTable = document.getElementById("alertTable").getElementsByTagName('tbody')[0];
             let number = 0;
             data.alerts.forEach(alert => {
-                let count_rick = 0
+                let count_rick = 0;
+                count_print = 1;
                 
                 const row = alertTable.insertRow();
                 const pluginIdCell = row.insertCell(0);
@@ -119,8 +120,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         instance.solution = " - "
                     }
 
-                    if (count_rick == 1){
-                        modalBody.innerHTML += `<p><b>Solution:</b> ${alert.solution.replace(/<p>|<\/p>/g, '')}</p><hr>
+                    if (count_print == 1){
+                        modalBody.innerHTML += `<p><b>Description:</b>${alert.desc.replace(/<p>|<\/p>/g, '')}</p><hr>
+                        <p><b>Solution:</b> ${alert.solution.replace(/<p>|<\/p>/g, '')}</p><hr>
                                             <p><b>URI:</b> ${instance.uri}</p>
                                            <p><b>Method:</b> ${instance.method}</p>
                                            <p><b>Parameter:</b> ${instance.param}</p>
@@ -128,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                            <p><b>Evidence:</b> ${instance.evidence}</p>
                                            <hr>`;
                     }
-                    if(count_rick > 1){
+                    if(count_print > 1){
                         modalBody.innerHTML += `<p><b>URI:</b> ${instance.uri}</p>
                                             <p><b>Method:</b> ${instance.method}</p>
                                             <p><b>Parameter:</b> ${instance.param}</p>
@@ -136,7 +138,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                             <p><b>Evidence:</b> ${instance.evidence}</p>
                                             <hr>`;
                     }
-                    count_rick += 1
+                    count_rick += 1;
+                    count_print += 1;
                     
                 });
                 riskCodeCell.innerHTML = count_rick;
@@ -225,6 +228,14 @@ async function fetchCertificate(url) {
             console.log('Client function fetchCertificate Success');
         }
     } catch (error) {
+        const check = '<i class="bi bi-check-circle-fill"></i>';
+        const not_check = '<i class="bi bi-x-circle-fill"></i>';
+        show_icon = document.getElementById("icon_cer");
+        show_result = document.getElementById("dayremaining");
+        show_icon.innerHTML = not_check
+        show_icon.style.color = "#FF3A00"
+        show_result.innerText = " " + 'No certificate';
+        console.log('Client function fetchCertificate Success');
         console.log('Error:', error);
     }
 }
@@ -245,7 +256,7 @@ function fetchLocation(url) {
             .then(response => {
                 console.log(response);
                 if (!response.ok) {
-                    Error;
+                    error;
                 }
                 return response.text();
             })
@@ -260,13 +271,15 @@ function fetchLocation(url) {
                 // locationIconElement.style.color = 'green';
             })
             .catch(error => {
-                console.error('Location Fetch Error:', error);
+                const countryServerElement = document.getElementById("countryServer");
+                countryServerElement.innerHTML = 'Internet Server Error';
+                console.error('Internet Server Error');
             });
-    } catch (error) {
+    } catch {
         const countryServerElement = document.getElementById("countryServer");
         // const locationIconElement = document.getElementById("Location_icon");
-
-        countryServerElement.innerHTML = 'An error occurred while fetching location data.';
+        console.error('Internet Server Error');
+        countryServerElement.innerHTML = 'Internet Server Error';
         // locationIconElement.style.color = 'red';
 
     }
@@ -338,61 +351,61 @@ function fetchWebserverEnginehttp(url) {
 
 function flags_country(country_server){
     // สร้าง URL ของ API
-const apiUrl = 'https://restcountries.com/v3.1/all?fields=name,flags';
-icon_loc = document.getElementById('icon_loc');
-status_icon = document.getElementById("status");
-const check = '<i class="bi bi-check-circle-fill"></i>';
-const danger = '<i class="bi bi-exclamation-circle-fill"></i>';
-console.log("fun flags = "+country_server)
+    const apiUrl = 'https://restcountries.com/v3.1/all?fields=name,flags';
+    icon_loc = document.getElementById('icon_loc');
+    status_icon = document.getElementById("status");
+    const check = '<i class="bi bi-check-circle-fill"></i>';
+    const danger = '<i class="bi bi-exclamation-circle-fill"></i>';
+    console.log("fun flags = "+country_server)
 
-fetch(apiUrl)
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error('ไม่สามารถดึงข้อมูลได้');
-    }
-  })
-  .then(data => {
-    data.forEach(country => {
-      const name = country.name ;
-      const flag = country.flags ;
-      if (country_server == name.common || country_server == name.official){
-        if (country_server !=  "Russia"||
-        country_server !="Russian Federation"||
-        country_server !="China"||
-        country_server !="People's Republic of China"||
-        country_server !="North Korea"||
-        country_server !="Democratic People's Republic of Korea"||
-        country_server !="Iran"||
-        country_server !="Islamic Republic of Iran"||
-        country_server !="India"||
-        country_server !="Republic of India"){
-            icon_loc.innerHTML = '<img src="'+flag.svg+'"  width="50" height="30">';
-            status_icon.innerHTML = check + " ";
-            status_icon.style.color = "#32FF00";
-        }if(country_server ==  "Russia"||
-        country_server =="Russian Federation"||
-        country_server =="China"||
-        country_server =="People's Republic of China"||
-        country_server =="North Korea"||
-        country_server =="Democratic People's Republic of Korea"||
-        country_server =="Iran"||
-        country_server =="Islamic Republic of Iran"||
-        country_server =="India"||
-        country_server =="Republic of India"){
-            icon_loc.innerHTML = '<img src="'+flag.svg+'"  width="50" height="30">';
-            status_icon.innerHTML = danger + " ";
-            status_icon.style.color = "#FF3A00";
+    fetch(apiUrl)
+    .then(response => {
+        if (response.ok) {
+        return response.json();
+        } else {
+        throw new Error('ไม่สามารถดึงข้อมูลได้');
         }
-      }
-      
-      
+    })
+    .then(data => {
+        data.forEach(country => {
+        const name = country.name ;
+        const flag = country.flags ;
+        if (country_server == name.common || country_server == name.official){
+            if (country_server !=  "Russia"||
+            country_server !="Russian Federation"||
+            country_server !="China"||
+            country_server !="People's Republic of China"||
+            country_server !="North Korea"||
+            country_server !="Democratic People's Republic of Korea"||
+            country_server !="Iran"||
+            country_server !="Islamic Republic of Iran"||
+            country_server !="India"||
+            country_server !="Republic of India"){
+                icon_loc.innerHTML = '<img src="'+flag.svg+'"  width="50" height="30">';
+                status_icon.innerHTML = check + " ";
+                status_icon.style.color = "#32FF00";
+            }if(country_server ==  "Russia"||
+            country_server =="Russian Federation"||
+            country_server =="China"||
+            country_server =="People's Republic of China"||
+            country_server =="North Korea"||
+            country_server =="Democratic People's Republic of Korea"||
+            country_server =="Iran"||
+            country_server =="Islamic Republic of Iran"||
+            country_server =="India"||
+            country_server =="Republic of India"){
+                icon_loc.innerHTML = '<img src="'+flag.svg+'"  width="50" height="30">';
+                status_icon.innerHTML = danger + " ";
+                status_icon.style.color = "#FF3A00";
+            }
+        }
+        
+        
+        });
+    })
+    .catch(error => {
+        console.error(error);
     });
-  })
-  .catch(error => {
-    console.error(error);
-  });
 
 }
 
