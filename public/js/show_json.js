@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                             <hr>`;
                     }
                     count_rick += 1;
-                    count_print += 1;
+                    
                     
                 });
                 riskCodeCell.innerHTML = count_rick;
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const inputUrl = data.site ;
                 console.log(inputUrl)
-                if (count_rick == 1){
+                if (count_print == 1){
                     fetchCertificate(inputUrl);
                     const new_url = new URL(inputUrl)
                     console.log("start new url = "+new_url.host)
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     fetchWebserverEnginehttp(inputUrl);
                     
                 }
-                
+                count_print += 1;
                 // fetchLocation(inputUrl);
                 // fetchWebserverEnginehttp(inputUrl);
                             
