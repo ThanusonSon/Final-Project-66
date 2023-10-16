@@ -1,12 +1,10 @@
 
 
 
-
+var currentDate = new Date();
 
 // @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
 document.addEventListener("DOMContentLoaded", function () {
-    
-
     // C:\Users\ratha\Downloads\vulnerability_web\public\python\zap_report.json
     fetch("/python/zap_report.json") 
         .then(response => response.json())
@@ -146,6 +144,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 riskCodeCell.style.textAlign = "center"
                 const headElement = document.querySelector('.show_site');
                 headElement.innerHTML = `<b>Site : </b>${data.site}`;
+                // day = document.getElementsByClassName("day") ;
+                // day.innerHTML = "Day : "+day+"/"+month+"/"+year;
+                // time = document.getElementsByClassName("time") ;
+                // time.innerHTML = "Time : "+hours+":"+minutes;
 
                 const inputUrl = data.site ;
                 console.log(inputUrl)
@@ -192,6 +194,7 @@ async function fetchCertificate(url) {
         const response = await fetch(`/certificate?url=${url}`);
         const certificateResult = await response.json();
 
+
         let result_cert = certificateResult["daysRemaining"];
         console.log('result cert = ' + result_cert);
 
@@ -200,34 +203,41 @@ async function fetchCertificate(url) {
         show_icon = document.getElementById("icon_cer");
         show_result = document.getElementById("dayremaining");
 
+        let validFrom = "Start valid from " + new Date(certificateResult["validFrom"]).toLocaleString();
+        let validTo = "Expire valid to " + new Date(certificateResult["validTo"]).toLocaleString();
+        const show_time = document.getElementById("cer_time");
+        console.log(validFrom + " - " + validTo)
+        show_time.innerHTML = validFrom + "<br>" + validTo;
+        show_time.style.fontSize = "16px"
+
         if (certificateResult["valid"] === true && result_cert > 0) {
             // document.getElementsByClassName('show_cer').innerHTML = result_cert + ' remaining'
             // document.getElementById('Certificate_icon').style.color = 'green';
             
             show_icon.innerHTML = check
             show_icon.style.color = '#32FF00'
-            show_result.innerText = " " + result_cert +' Day remaining';
+            show_result.innerText = " " + result_cert +' Days remaining';
             console.log('Client function fetchCertificate Success');
         } else if (certificateResult["valid"] === true && result_cert < 0) {
             //document.getElementsByClassName('show_cer').innerHTML = result_cert + ' Expired'
             // document.getElementById('Certificate_icon').style.color = 'red';
             show_icon.innerHTML = not_check
             show_icon.style.color = "#FF3A00"
-            show_result.innerText = " " + result_cert + ' Day Expired';
+            show_result.innerText = " " + result_cert + ' Days Expired';
             console.log('Client function fetchCertificate Success');
         } else if (certificateResult["valid"] === false) {
             //document.getElementsByClassName('show_cer').innerHTML = result_cert + ' Fake validate'
             // document.getElementById('Certificate_icon').style.color = 'red';
             show_icon.innerHTML = not_check
             show_icon.style.color = "#FF3A00"
-           show_result.innerText = " " + result_cert+'Fake validate';
+           show_result.innerText = " " + result_cert+' Days remaining expire';
             console.log('Client function fetchCertificate Success');
         } else {
             //document.getElementsByClassName('show_cer').innerHTML = result_cert + ' Invalid'
             // document.getElementById('Certificate_icon').style.color = 'red';
             show_icon.innerHTML = not_check
             show_icon.style.color = "#FF3A00"
-            show_result.innerText = " " + 'Invalid';
+            show_result.innerText = " " + 'Fake validate';
             console.log('Client function fetchCertificate Success');
         }
     } catch (error) {

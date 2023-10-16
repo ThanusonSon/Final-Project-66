@@ -1,33 +1,6 @@
 {
-    "site": "https://www.mpk.ac.th/",
+    "site": "https://www.w3schools.com/",
     "alerts": [
-        {
-            "pluginid": "10062",
-            "alertRef": "10062",
-            "alert": "PII Disclosure",
-            "name": "PII Disclosure",
-            "riskcode": "3",
-            "confidence": "2",
-            "riskdesc": "High (Medium)",
-            "desc": "<p>The response contains Personally Identifiable Information, such as CC number, SSN and similar sensitive data.</p>",
-            "instances": [
-                {
-                    "uri": "http://www.mpk.ac.th/auction.html",
-                    "method": "GET",
-                    "param": "",
-                    "attack": "",
-                    "evidence": "2274103086036032",
-                    "otherinfo": "Credit Card Type detected: Mastercard"
-                }
-            ],
-            "count": "1",
-            "solution": "<p>Check the response for the potential presence of personally identifiable information (PII), ensure nothing sensitive is leaked by the application.</p>",
-            "otherinfo": "<p>Credit Card Type detected: Mastercard</p>",
-            "reference": "",
-            "cweid": "359",
-            "wascid": "13",
-            "sourceid": "537"
-        },
         {
             "pluginid": "10038",
             "alertRef": "10038-1",
@@ -39,7 +12,7 @@
             "desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
             "instances": [
                 {
-                    "uri": "http://www.mpk.ac.th/auction.html",
+                    "uri": "https://wrong.host.badssl.com",
                     "method": "GET",
                     "param": "",
                     "attack": "",
@@ -47,7 +20,7 @@
                     "otherinfo": ""
                 },
                 {
-                    "uri": "http://www.mpk.ac.th/e-bidding/c14072566.pdf",
+                    "uri": "https://wrong.host.badssl.com/",
                     "method": "GET",
                     "param": "",
                     "attack": "",
@@ -55,31 +28,7 @@
                     "otherinfo": ""
                 },
                 {
-                    "uri": "http://www.mpk.ac.th/file%20for%20download/Abstract%20krunarumol1.pdf",
-                    "method": "GET",
-                    "param": "",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": ""
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/mnews.html",
-                    "method": "GET",
-                    "param": "",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": ""
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/re_public.html",
-                    "method": "GET",
-                    "param": "",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": ""
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/rong_sutep_abst2.pdf",
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
                     "method": "GET",
                     "param": "",
                     "attack": "",
@@ -87,13 +36,13 @@
                     "otherinfo": ""
                 }
             ],
-            "count": "6",
+            "count": "3",
             "solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
             "otherinfo": "",
             "reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>http://www.w3.org/TR/CSP/</p><p>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</p><p>http://www.html5rocks.com/en/tutorials/security/content-security-policy/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
             "cweid": "693",
             "wascid": "15",
-            "sourceid": "537"
+            "sourceid": "8486"
         },
         {
             "pluginid": "10020",
@@ -106,7 +55,7 @@
             "desc": "<p>The response does not include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options to protect against 'ClickJacking' attacks.</p>",
             "instances": [
                 {
-                    "uri": "http://www.mpk.ac.th/auction.html",
+                    "uri": "https://wrong.host.badssl.com",
                     "method": "GET",
                     "param": "x-frame-options",
                     "attack": "",
@@ -114,15 +63,7 @@
                     "otherinfo": ""
                 },
                 {
-                    "uri": "http://www.mpk.ac.th/mnews.html",
-                    "method": "GET",
-                    "param": "x-frame-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": ""
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/re_public.html",
+                    "uri": "https://wrong.host.badssl.com/",
                     "method": "GET",
                     "param": "x-frame-options",
                     "attack": "",
@@ -130,13 +71,163 @@
                     "otherinfo": ""
                 }
             ],
-            "count": "3",
+            "count": "2",
             "solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
             "otherinfo": "",
             "reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
             "cweid": "1021",
             "wascid": "15",
-            "sourceid": "537"
+            "sourceid": "8486"
+        },
+        {
+            "pluginid": "10036",
+            "alertRef": "10036",
+            "alert": "Server Leaks Version Information via \"Server\" HTTP Response Header Field",
+            "name": "Server Leaks Version Information via \"Server\" HTTP Response Header Field",
+            "riskcode": "1",
+            "confidence": "3",
+            "riskdesc": "Low (High)",
+            "desc": "<p>The web/application server is leaking version information via the \"Server\" HTTP response header. Access to such information may facilitate attackers identifying other vulnerabilities your web/application server is subject to.</p>",
+            "instances": [
+                {
+                    "uri": "https://wrong.host.badssl.com",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "nginx/1.10.3 (Ubuntu)",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "nginx/1.10.3 (Ubuntu)",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons/favicon-red.ico",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "nginx/1.10.3 (Ubuntu)",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons/icon-red.png",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "nginx/1.10.3 (Ubuntu)",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/robots.txt",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "nginx/1.10.3 (Ubuntu)",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "nginx/1.10.3 (Ubuntu)",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/style.css",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "nginx/1.10.3 (Ubuntu)",
+                    "otherinfo": ""
+                }
+            ],
+            "count": "7",
+            "solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to suppress the \"Server\" header or provide generic details.</p>",
+            "otherinfo": "",
+            "reference": "<p>http://httpd.apache.org/docs/current/mod/core.html#servertokens</p><p>http://msdn.microsoft.com/en-us/library/ff648552.aspx#ht_urlscan_007</p><p>http://blogs.msdn.com/b/varunm/archive/2013/04/23/remove-unwanted-http-response-headers.aspx</p><p>http://www.troyhunt.com/2012/02/shhh-dont-let-your-response-headers.html</p>",
+            "cweid": "200",
+            "wascid": "13",
+            "sourceid": "8486"
+        },
+        {
+            "pluginid": "10035",
+            "alertRef": "10035",
+            "alert": "Strict-Transport-Security Header Not Set",
+            "name": "Strict-Transport-Security Header Not Set",
+            "riskcode": "1",
+            "confidence": "3",
+            "riskdesc": "Low (High)",
+            "desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
+            "instances": [
+                {
+                    "uri": "https://wrong.host.badssl.com",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons/favicon-red.ico",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons/icon-red.png",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/robots.txt",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/style.css",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                }
+            ],
+            "count": "7",
+            "solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
+            "otherinfo": "",
+            "reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>http://caniuse.com/stricttransportsecurity</p><p>http://tools.ietf.org/html/rfc6797</p>",
+            "cweid": "319",
+            "wascid": "15",
+            "sourceid": "8486"
         },
         {
             "pluginid": "10021",
@@ -149,7 +240,7 @@
             "desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
             "instances": [
                 {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%20%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%95%E0%B8%B9%E0%B9%89%E0%B8%A5%E0%B8%B3%E0%B9%82%E0%B8%9E%E0%B8%87%20%E0%B8%A5%E0%B8%A7.5%20%E0%B9%80%E0%B8%A1.%E0%B8%A2.%2065.pdf",
+                    "uri": "https://wrong.host.badssl.com",
                     "method": "GET",
                     "param": "x-content-type-options",
                     "attack": "",
@@ -157,7 +248,7 @@
                     "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
                 },
                 {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%20%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%8B%E0%B9%88%E0%B8%AD%E0%B8%A1%E0%B8%9A%E0%B8%B3%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B8%A3%E0%B8%96%E0%B8%A2%E0%B8%99%E0%B8%95%E0%B9%8C%E0%B8%AA%E0%B9%88%E0%B8%A7%E0%B8%99%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%20%E0%B8%A5%E0%B8%A7.%208%20%E0%B9%80%E0%B8%A1.%E0%B8%A2.%2065.pdf",
+                    "uri": "https://wrong.host.badssl.com/",
                     "method": "GET",
                     "param": "x-content-type-options",
                     "attack": "",
@@ -165,7 +256,7 @@
                     "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
                 },
                 {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%20%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%97%E0%B8%B3%E0%B8%9B%E0%B9%89%E0%B8%B2%E0%B8%A2%E0%B9%82%E0%B8%9F%E0%B8%A1%E0%B8%9A%E0%B8%AD%E0%B8%A3%E0%B9%8C%20%E0%B8%A5%E0%B8%A7.%204%E0%B9%80%E0%B8%A1.%E0%B8%A2.%2065.pdf",
+                    "uri": "https://wrong.host.badssl.com/icons/favicon-red.ico",
                     "method": "GET",
                     "param": "x-content-type-options",
                     "attack": "",
@@ -173,7 +264,7 @@
                     "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
                 },
                 {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%20%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B8%20%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%20%E0%B8%84%E0%B8%A3%E0%B8%B8%E0%B8%A0%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%8A%E0%B8%B2%E0%B8%AA%E0%B8%B1%E0%B8%A1%E0%B8%9E%E0%B8%B1%E0%B8%99%E0%B8%98%E0%B9%8C%20%E0%B8%A5%E0%B8%A7.29%20%E0%B8%A1%E0%B8%B5.%E0%B8%84.%2065.pdf",
+                    "uri": "https://wrong.host.badssl.com/icons/icon-red.png",
                     "method": "GET",
                     "param": "x-content-type-options",
                     "attack": "",
@@ -181,7 +272,7 @@
                     "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
                 },
                 {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%20%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%A7%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B8%20%E0%B8%AD%E0%B8%B8%E0%B8%9B%E0%B8%81%E0%B8%A3%E0%B8%93%E0%B9%8C%20%E0%B8%A0%E0%B8%B2%E0%B8%A9%E0%B8%B2%E0%B8%8D%E0%B8%B5%E0%B9%88%E0%B8%9B%E0%B8%B8%E0%B9%88%E0%B8%99%20%E0%B8%A5%E0%B8%A7.8%20%E0%B9%80%E0%B8%A1.%E0%B8%A2.%2065.pdf",
+                    "uri": "https://wrong.host.badssl.com/robots.txt",
                     "method": "GET",
                     "param": "x-content-type-options",
                     "attack": "",
@@ -189,855 +280,7 @@
                     "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
                 },
                 {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9A%E0%B8%B8%E0%B8%84%E0%B8%84%E0%B8%A5%20(%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%95%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4).pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9A%E0%B8%B8%E0%B8%84%E0%B8%84%E0%B8%A5%20(%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B9%84%E0%B8%97%E0%B8%A2).pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%9E%E0%B8%B4%E0%B8%A1%E0%B8%9E%E0%B9%8C%E0%B8%9A%E0%B8%B1%E0%B8%95%E0%B8%A3%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99%20%E0%B8%A5%E0%B8%A7.5%20%E0%B9%80%E0%B8%A1.%E0%B8%A2.%2065.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%20%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%96%E0%B9%88%E0%B8%B2%E0%B8%A2%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B9%80%E0%B8%A5%E0%B9%88%E0%B8%A1%20%E0%B8%A5%E0%B8%A7.4%20%E0%B9%80%E0%B8%A1.%E0%B8%A2.%2065.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%20%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%AB%E0%B8%A1%E0%B8%B2%E0%B8%97%E0%B8%B3%E0%B9%84%E0%B8%A7%E0%B8%99%E0%B8%B4%E0%B8%A5%2011%20%E0%B9%80%E0%B8%A1.%E0%B8%A2.%2065.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%8A%E0%B8%99%E0%B8%B0%E0%B9%80%E0%B8%AA%E0%B8%99%E0%B8%AD%E0%B8%A3%E0%B8%B2%E0%B8%84%E0%B8%B2%20%E0%B8%8B%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%84%E0%B8%A3%E0%B8%B8%E0%B8%A0%E0%B8%B1%E0%B8%93%E0%B8%91%E0%B9%8C%E0%B8%95%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%9A%E0%B9%80%E0%B8%AD%E0%B8%81%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%B1%E0%B8%AA%E0%B8%94%E0%B8%B8%20%E0%B8%A5%E0%B8%A7.30%20%E0%B8%A1%E0%B8%B5.%E0%B8%84.%2065.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%A1%E0%B8%B1%E0%B8%84%E0%B8%A3%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%AD%E0%B8%99%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%87%E0%B8%9A%E0%B8%AA%E0%B8%A1%E0%B8%B2%E0%B8%84%E0%B8%A1%E0%B8%AF.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%A1%E0%B8%B1%E0%B8%84%E0%B8%A3%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%AD%E0%B8%99-%E0%B8%88%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B8%94%E0%B9%89%E0%B8%A7%E0%B8%A2%E0%B8%87%E0%B8%9A-%E0%B8%AD%E0%B8%9A%E0%B8%88..pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/%E0%B8%A3%E0%B8%B9%E0%B8%9B%20SMART%20Model.jpg",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/0001%E0%B8%9A%E0%B8%97%E0%B8%84%E0%B8%B1%E0%B8%94%E0%B8%A2%E0%B9%88%E0%B8%AD%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%AA%E0%B8%B9%E0%B8%95%E0%B8%A3.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/0001%E0%B8%9A%E0%B8%97%E0%B8%84%E0%B8%B1%E0%B8%94%E0%B8%A2%E0%B9%88%E0%B8%ADSMART%20Model.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/0018%E0%B8%84%E0%B8%B9%E0%B9%88%E0%B8%A1%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%83%E0%B8%8A%E0%B9%89-SMART-Model.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/1%20PDF.20.04.22.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/3.PDF.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/action291165/%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%93%E0%B8%B4%E0%B8%95%E0%B8%AF-3000-%E0%B8%9A..pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/arrow.gif",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/auction.html",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/auction120166/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9C%E0%B8%A5%E0%B8%AA%E0%B8%AD%E0%B8%9A-%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%AA%E0%B8%B1%E0%B8%87%E0%B8%84%E0%B8%A1-%E0%B9%81%E0%B8%A5%E0%B8%B0-%E0%B9%80%E0%B8%81%E0%B8%A9%E0%B8%95%E0%B8%A3.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/book28032565.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/book300365.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/button/new.gif",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/button/set01.gif",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/04082566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/090866.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/ak140766.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/c8072566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/D180566-1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/D180566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/D260566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E13062566-6.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E14072566-2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E14072566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E15062566-5.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E17072566-3.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E24062566-4.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E260566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E29062566-2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E29062566-3.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E29062566-4.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/E29062566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F06092566-10.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F06092566-9.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F28082566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F30082566-1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F30082566-2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F30082566-3.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F30082566-4.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F30082566-5.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F31082566-6.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F31082566-7.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/F31082566-8.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/G11092522-7.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/G11092566-6.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/G22082566-1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/G22082566-2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/G29082566-4.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/G29082566-5.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/ps090566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866%20-8.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866-1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866-2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866-3.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866-4.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866-5.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866-6.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866-7.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh220866.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh280866-2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/e-bidding/sh280866.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/filefordownload/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%A5%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B922566.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/filefordownload/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%A1%E0%B8%B5%E0%B8%AA%E0%B8%B4%E0%B8%97%E0%B8%98%E0%B8%B4%E0%B8%84%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81%E0%B8%9E%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%88.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/filefordownload/%E0%B8%9E%E0%B8%B4%E0%B8%A1%E0%B8%9E%E0%B9%8C%E0%B8%8A%E0%B8%99%E0%B8%81%20%E0%B8%9A%E0%B8%97%E0%B8%84%E0%B8%B1%E0%B8%94%E0%B8%A2%E0%B9%88%E0%B8%AD1.%20%E0%B9%80%E0%B8%A8%E0%B8%A3%E0%B8%A9%E0%B8%90%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/filefordownload/Abstract%20krunarumol2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/filefordownload/Abstract%20krunutchayakan1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/filefordownload/Abstract%20krunutchayakan2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/flipped.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/kru65_kaset.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/kru65_social.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/mnews.html",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/mok1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/mok2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/multi.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/pattaraporn1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/pattaraporn2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/Pranee-Sungnoi-Abstract-1-2563.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/Pranee-Sungnoi-Abstract-2-2562.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/re_public.html",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/readmore.png",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/rong_sutep_abst1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/sarinya1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/sarinya2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/siriporn1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/siriporn2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/sujanya_activities.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/sujanya_project.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/sukanya1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/sukanya2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/sumalee1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/sumalee2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/surachai1_2021.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/surachai2_2021.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/teerasan1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/teerasan2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/upload300366/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%A5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81-%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%AD%E0%B8%99-1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/upload300366/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%9C%E0%B8%A5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%84%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81-%E0%B8%84%E0%B8%A3%E0%B8%B9%E0%B8%9C%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%AD%E0%B8%99-2.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/yok1.pdf",
-                    "method": "GET",
-                    "param": "x-content-type-options",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
-                },
-                {
-                    "uri": "http://www.mpk.ac.th/yok2.pdf",
+                    "uri": "https://wrong.host.badssl.com/style.css",
                     "method": "GET",
                     "param": "x-content-type-options",
                     "attack": "",
@@ -1045,40 +288,227 @@
                     "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
                 }
             ],
-            "count": "112",
+            "count": "6",
             "solution": "<p>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</p>",
             "otherinfo": "<p>This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</p><p>At \"High\" threshold this scan rule will not alert on client or server error responses.</p>",
             "reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
             "cweid": "693",
             "wascid": "15",
-            "sourceid": "708"
+            "sourceid": "8486"
         },
         {
-            "pluginid": "10109",
-            "alertRef": "10109",
-            "alert": "Modern Web Application",
-            "name": "Modern Web Application",
+            "pluginid": "10015",
+            "alertRef": "10015",
+            "alert": "Re-examine Cache-control Directives",
+            "name": "Re-examine Cache-control Directives",
+            "riskcode": "0",
+            "confidence": "1",
+            "riskdesc": "Informational (Low)",
+            "desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
+            "instances": [
+                {
+                    "uri": "https://wrong.host.badssl.com",
+                    "method": "GET",
+                    "param": "cache-control",
+                    "attack": "",
+                    "evidence": "no-store",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/",
+                    "method": "GET",
+                    "param": "cache-control",
+                    "attack": "",
+                    "evidence": "no-store",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/robots.txt",
+                    "method": "GET",
+                    "param": "cache-control",
+                    "attack": "",
+                    "evidence": "no-store",
+                    "otherinfo": ""
+                }
+            ],
+            "count": "3",
+            "solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
+            "otherinfo": "",
+            "reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
+            "cweid": "525",
+            "wascid": "13",
+            "sourceid": "8486"
+        },
+        {
+            "pluginid": "10104",
+            "alertRef": "10104",
+            "alert": "User Agent Fuzzer",
+            "name": "User Agent Fuzzer",
             "riskcode": "0",
             "confidence": "2",
             "riskdesc": "Informational (Medium)",
-            "desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
+            "desc": "<p>Check for differences in response based on fuzzed User Agent (eg. mobile sites, access as a Search Engine Crawler). Compares the response statuscode and the hashcode of the response body with the original response.</p>",
             "instances": [
                 {
-                    "uri": "http://www.mpk.ac.th/re_public.html",
+                    "uri": "https://wrong.host.badssl.com/icons",
                     "method": "GET",
-                    "param": "",
-                    "attack": "",
-                    "evidence": "<a name=\"_Hlk81001748\" id=\"_Hlk81001748\">\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07 \u0e04\u0e27\u0e32\u0e21\u0e2a\u0e31\u0e21\u0e1e\u0e31\u0e19\u0e18\u0e4c\u0e41\u0e25\u0e30\u0e1f\u0e31\u0e07\u0e01\u0e4c\u0e0a\u0e31\u0e19</a>",
-                    "otherinfo": "Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application."
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/icons",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "msnbot/1.1 (+http://search.msn.com/msnbot.htm)",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://wrong.host.badssl.com/sitemap.xml",
+                    "method": "GET",
+                    "param": "Header User-Agent",
+                    "attack": "msnbot/1.1 (+http://search.msn.com/msnbot.htm)",
+                    "evidence": "",
+                    "otherinfo": ""
                 }
             ],
-            "count": "1",
-            "solution": "<p>This is an informational alert and so no changes are required.</p>",
-            "otherinfo": "<p>Links have been found that do not have traditional href attributes, which is an indication that this is a modern web application.</p>",
-            "reference": "",
-            "cweid": "-1",
-            "wascid": "-1",
-            "sourceid": "450"
+            "count": "19",
+            "solution": "",
+            "otherinfo": "",
+            "reference": "<p>https://owasp.org/wstg</p>",
+            "cweid": "0",
+            "wascid": "0",
+            "sourceid": "8695"
         }
     ],
     "hosts": null,
