@@ -151,7 +151,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(inputUrl)
                 if (count_rick == 1){
                     fetchCertificate(inputUrl);
-                    fetchLocation(inputUrl);
+                    const new_url = new URL(inputUrl)
+                    console.log("start new url = "+new_url.host)
+
+                    fetchLocation(new_url.host);
                     fetchWebserverEnginehttp(inputUrl);
                     
                 }
@@ -244,8 +247,9 @@ async function fetchCertificate(url) {
 
 
 function fetchLocation(url) {
-    url_text = url.split("//");
-    url = url_text[1];
+    // url_text = url.split("//");
+    // url = url_text[1];
+    console.log("DNS URL = "+url);
     console.log('Client function fetchLocation working... '+url);
     // const check = '<i class="bi bi-check-circle-fill"></i>';
     // const not_check = '<i class="bi bi-x-circle-fill"></i>';
@@ -288,8 +292,8 @@ function fetchLocation(url) {
 
 
 function fetchWebserverEnginehttp(url) {
-    url_text = url.split("//");
-    url = url_text[1];
+    // url_text = url.split("//");
+    // url = url_text[1];
     console.log('Client function fetchWebserverEnginehttp working... '+url);
     const check = '<i class="bi bi-check-circle-fill"></i>';
     const not_check = '<i class="bi bi-x-circle-fill"></i>';
@@ -336,18 +340,32 @@ function fetchWebserverEnginehttp(url) {
                 // engineHTTPElement.style.color = "red";
                 icon_http.innerHTML = not_check+" " ;
                 icon_http.style.color = '#FF3A00'
-                serverHTTPElement.innerText = error;
+                serverHTTPElement.innerText = "No Engine HTTP";
             });
     } catch (error) {
-        console.error('Fetch Error:', error);
-        icon_http.innerHTML = not_check+" " ;
-        icon_http.style.color = '#FF3A00'
-        // const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
-        const serverHTTPElement = document.getElementById("serverHTTP");
-        // engineHTTPElement.style.color = "red";
-        serverHTTPElement.innerText = 'An error occurred while making the request.';
+        const new_url_inner = "http://"+url
+        return new Promise((resolve, reject) => {
+            http.get(new_url_inner, (res) => {
+                console.log(new_url_inner)
+                let header = res.headers["server"];
+                console.log(`The HTTP server engine is: ${header}`);
+                resolve(header);
+                icon_http.innerHTML = check+" " ;
+                icon_http.style.color = '#32FF00';
+                // const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
+                const serverHTTPElement = document.getElementById("serverHTTP");
+                // engineHTTPElement.style.color = "red";
+                serverHTTPElement.innerText = header;
+            }).on('error', (error) => {
+                reject(error)
+            });
+        })
     }
 }
+
+
+
+
 
 function flags_country(country_server){
     // สร้าง URL ของ API

@@ -73,7 +73,7 @@ def run_zap_scan(url):
         # C:\Users\ratha\Downloads\vulnerability_web\public\report.html
         browser_path = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
         webbrowser.register('edge', None, webbrowser.BackgroundBrowser(browser_path))
-        webbrowser.get('edge').open(file)
+        webbrowser.get('edge').open(file ,new=2)
 
 
 

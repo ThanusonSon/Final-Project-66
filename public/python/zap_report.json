@@ -1,5 +1,5 @@
 {
-    "site": "https://www.example.com/",
+    "site": "http://testphp.vulnweb.com/",
     "alerts": [
         {
             "pluginid": "10038",

@@ -27,8 +27,17 @@ function checkLocation(url) {
                 }
             
                 //===============================================================================================
+
+
+            // const new_url_for_dns = new URL(url);
+            // const dns_url = new_url_for_dns.host
+
+            // url = new URL(url);
+            // console.log("DNS URL = "+url);
             
             dns.lookup(url, (err, address, family) => {
+
+                // http://www.nkk.ac.th/
                 if (err) {
                     // document.getElementById("Location_icon").style.color = "green";
                     console.error(`DNS lookup failed: ${err}`);

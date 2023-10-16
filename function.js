@@ -8,6 +8,7 @@ const sslChecker = require('ssl-checker');
 const https = require('https');
 const dns = require('dns');
 const axios = require('axios');
+const http = require('http');
 
 
 async function checkCertificate(url) {
