@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000
 const check_Certificate = require('./myfunction/certificate')
 const check_Location = require('./myfunction/location_check')
 const check_WebServerEngineHTTP = require('./myfunction/webserver_enginehttp_check')
+const get_sql = require('./myfunction/login')
 const sendlink = require('./myfunction/server_sendlink')
 
 const { exec } = require('child_process');
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/scan_web_ver.html');
     
 });
+
 
 // app.post('/send-to-server', async (req, res) => {
 //     const inputValue = req.body.inputValue;
@@ -83,6 +85,38 @@ app.get('/', (req, res) => {
 //     const result = f.checkCertificate(url);
 //     res.send(result);
 // });
+
+
+
+
+
+
+
+
+
+
+
+
+app.get('/getsqlreq', async(req, res)=> {
+    console.log('server get sql working...')
+    let sqlreqEmail = req.query.email;
+    let sqlreqPass = req.query.pass;
+
+    try {
+        const sqlResult = await get_sql.getSQL(sqlreqEmail, sqlreqPass);
+
+        // console.log(result);
+        res.send(sqlResult);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('An error SQL Request.')
+    }
+})
+
+
+
+
+
 
 app.get('/certificate', async (req, res) => {
     console.log('server function certificate working...')

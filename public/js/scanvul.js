@@ -59,6 +59,7 @@ document.getElementById('scanvulbtn').addEventListener('click', () => {
     fetchScanvul(inputUrl);
 });
 
+
 // document.addEventListener('DOMContentLoaded', () => {
 //     // const url = req.query.url;
 //     // const urlParams = new URLSearchParams(window.location.search);
@@ -89,6 +90,18 @@ document.getElementById('scanvulbtn').addEventListener('click', () => {
 // const url = req.body.url;
 // processURLFromServer(urlFromServer);
 
+function fetchSQL(email,passwd) {
+    console.log('client function fetchScanvul working...')
+    fetch(`/getsqlreq?sqlreqEmail=${email}&sqlreqPass=${passwd}`)
+    ///getsqlreq?sqlreq1=${sqlreq1}&sqlreq2=${sqlreq2}
+    .then(response => response.text())
+    .then(sqlResult => {
+        console.log(sqlResult);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 
 function fetchScanvul(url) {

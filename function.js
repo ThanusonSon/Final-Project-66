@@ -277,4 +277,3 @@ scan.addEventListener("click", () => {
         }
     });
 });
-
