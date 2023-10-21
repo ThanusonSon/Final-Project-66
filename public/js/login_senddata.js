@@ -10,7 +10,8 @@ document.getElementById('login').addEventListener('click', () => {
 function fetchSQL(email,pass) {
   console.log('SQL function fetchSQL working...')
   
-  fetch(`/getsqlreq?email=${email}&pass=${pass}`)
+  // fetch(`/auth?email=${email}&pass=${pass}`)
+  fetch(`/auth`)
 
   ///getsqlreq?sqlreq1=${sqlreq1}&sqlreq2=${sqlreq2}
   .then(response => response.text())
@@ -20,4 +21,5 @@ function fetchSQL(email,pass) {
   .catch(error => {
       console.error('Error:', error);
   });
+  
 }

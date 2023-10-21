@@ -1,7 +1,16 @@
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'vulnerability_checker'
+});
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -20,10 +29,11 @@ app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/scan_web_ver.html');
-    
-});
+// app.get('/', (req, res) => {
+//     // res.sendFile(__dirname + '/public/scan_web_ver.html');
+//     res.sendFile(__dirname + '/public/index.html');
+// });
+
 
 
 // app.post('/send-to-server', async (req, res) => {
@@ -91,29 +101,65 @@ app.get('/', (req, res) => {
 
 
 
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-
-
-
-app.get('/getsqlreq', async(req, res)=> {
-    console.log('server get sql working...')
-    let sqlreqEmail = req.query.email;
-    let sqlreqPass = req.query.pass;
-
-    try {
-        const sqlResult = await get_sql.getSQL(sqlreqEmail, sqlreqPass);
-
-        // console.log(result);
-        res.send(sqlResult);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send('An error SQL Request.')
-    }
+app.get('/',function(req,res){
+    express.res.sendFile(path.join(__dirname + '/public/index.html'))
 })
 
 
+app.post('/auth', async(req, res)=> {
+    // console.log('server get sql working...')
+    let sqlreqEmail = req.body.email;
+    let sqlreqPass = req.body.pass;
+    // console.log(sqlreqEmail,'asdasdasdadasdas&&',sqlreqPass);
+
+    if (sqlreqEmail && sqlreqPass){
+        connection.query('SELECT * FROM user WHERE email = ? AND passwd = ?', [sqlreqEmail, sqlreqPass], function(error, results, fields){
+            if (error) throw error;
+            if (results.length >0){
+                req.session.loggedin = true;
+				req.session.username = sqlreqEmail;
+                // res.sendFile(path.join(__dirname + '/public/scan_web_ver.html'));
+                res.redirect('/public/scan_web_ver');
+            }else{
+                res.send('Incorrect Username and/or Password!');
+                
+            }
+            res.end();
+        });
+    }else{
+        res.send('Please enter Username and Password!');
+		res.end();
+    }
+    // try {
+    //     const sqlResult = await get_sql.getSQL(sqlreqEmail, sqlreqPass);
+
+    //     // console.log(result);
+    //     res.send(sqlResult);
+    // } catch (error) {
+    //     console.log(error);
+    //     res.status(500).send('An error SQL Request.')
+    // }
+});
+
+
+app.get('/public/scan_web_ver',function(req ,res){
+    if (req.session.loggedin){
+        res.redirect('/scan_web_ver.html');
+        // res.sendFile(path.join(__dirname + '/public/scan_web_ver.html'))
+    }else{
+        res.send('Please login to view this page!');
+    }
+    res.end();
+});
 
 
 

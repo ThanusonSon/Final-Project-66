@@ -92,11 +92,12 @@ document.getElementById('scanvulbtn').addEventListener('click', () => {
 
 function fetchSQL(email,passwd) {
     console.log('client function fetchScanvul working...')
-    fetch(`/getsqlreq?sqlreqEmail=${email}&sqlreqPass=${passwd}`)
+    fetch(`/auth?sqlreqEmail=${email}&sqlreqPass=${passwd}`)
     ///getsqlreq?sqlreq1=${sqlreq1}&sqlreq2=${sqlreq2}
     .then(response => response.text())
     .then(sqlResult => {
         console.log(sqlResult);
+        console.log(email, pass)
     })
     .catch(error => {
         console.error('Error:', error);

@@ -285,6 +285,17 @@
 
     </script>
     <script src="./js/scanvul.js"></script>
+    <script>
+        window.addEventListener('message', (event) => {
+            if (event.data === 'closeModal') {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            document.getElementById('modal-alert-plugin-id').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
