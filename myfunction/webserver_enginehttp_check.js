@@ -9,6 +9,8 @@ function checkWebServerEngineHTTP(url) {
     // `https://${check.startsWith("www.") ? check : "www." + check}`;
     
     return new Promise((resolve, reject) => {
+
+
         if (url.startsWith("https://")){
             const new_url = new URL(url)
             const url_en = "https://"+new_url.host
@@ -32,8 +34,13 @@ function checkWebServerEngineHTTP(url) {
                 reject(error)
             });
         } else {
+
+            const new_url = new URL(url)
+            const url_en = "https://"+new_url.host
+
+
             try{
-                https.get(url_en , (res) => {
+                https.get(url , (res) => {
                     let header = res.headers["server"];
                     console.log(`The HTTP server engine is: ${header}`);
                     resolve(header);
@@ -41,7 +48,12 @@ function checkWebServerEngineHTTP(url) {
                     reject(error)
                 });
             } catch (error){
-                http.get(url_en , (res) => {
+
+                // const new_url = new URL(url)
+                // const url_en = "https://"+new_url.host
+
+
+                http.get(url , (res) => {
                     let header = res.headers["server"];
                     console.log(`The HTTP server engine is: ${header}`);
                     resolve(header);

@@ -53,10 +53,10 @@ document.getElementById('scanvulbtn').addEventListener('click', () => {
     // const inputUrl = document.getElementById('inputUrl').value;
     const inputUrl = document.getElementsByClassName('linkToScan')[0].value;
     console.log('inputUrl is = ',inputUrl);
-    // fetchCertificate(inputUrl);
-    // fetchLocation(inputUrl);
-    // fetchWebserverEnginehttp(inputUrl);
-    fetchScanvul(inputUrl);
+    fetchCertificate(inputUrl);
+    fetchLocation(inputUrl);
+    fetchWebserverEnginehttp(inputUrl);
+    // fetchScanvul(inputUrl);
 });
 
 // document.addEventListener('DOMContentLoaded', () => {
