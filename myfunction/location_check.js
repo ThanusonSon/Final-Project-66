@@ -1,6 +1,7 @@
 const dns = require("dns");
 const axios = require('axios');
 const https = require("https");
+const http = require("http");
 
 
 function checkLocation(url) {
@@ -19,6 +20,7 @@ function checkLocation(url) {
                 try {
                     const response = await axios.get(`http://api.geonames.org/countryInfoJSON?username=location_f&country=${abbreviation}`);
                     const data = response.data.geonames[0];
+                    console.log(data.countryName)
                     return data.countryName;
                 } catch (error) {
                     console.error(error);
@@ -39,17 +41,21 @@ function checkLocation(url) {
 
                 // http://www.nkk.ac.th/
                 if (err) {
+                    console.log("IF ERROR ")
                     // document.getElementById("Location_icon").style.color = "green";
                     console.error(`DNS lookup failed: ${err}`);
                     reject(err)
                 } else {
+                    console.log("ELSE IF")
                     console.log(`IP address: ${address}`);
                     console.log(`Address family: IPv${family}`);
                     // resolve(address, family)
         
         
-                    https
-                        .get("https://ipinfo.io/" + address + "/json", (res) => {
+                    try {
+                        console.log("TRY")
+                        console.log(address)
+                        https.get("https://ipinfo.io/" + address + "/json", (res) => {
                             let data = "";
         
                             res.on("data", (chunk) => {
@@ -65,6 +71,52 @@ function checkLocation(url) {
                                 getCountryName(location.country)
                                 .then((fullName) => {
                                     console.log("location = " + fullName)
+                                    console.log('Check Location Successful')
+                                    resolve(fullName)
+                                    console.log(fullName)
+                                    // document.getElementById("countryServer").innerHTML = fullName;
+                                    // document.getElementById("Location_icon").style.color = "green";
+                                }) // outputs "United States of America"
+                                .catch((error) => {
+                                    console.log(error)
+                                    reject(error)
+                                    // document.getElementById("countryServer").innerHTML = "API Error";
+                                    // document.getElementById("Location_icon").style.color = "red";
+                                    
+                                });
+        
+                                // https://restcountries.com/#api-endpoints-v2-full-name
+                                // https://restcountries.com/v2/name/US?fullText=true
+                            });
+                        })
+                        .on("error", (err) => {
+                            // document.getElementById("Location_icon").style.color = "red";
+                            console.error(`IP geolocation failed: ${err}`);
+
+                            
+                            
+                            reject(err);
+                        });
+                    } catch (error) {
+                        http.get("http://ipinfo.io/" + address + "/json", (res) => {
+                            let data = "";
+
+                            console.log(" CATCH ")
+        
+                            res.on("data", (chunk) => {
+                                data += chunk;
+                            });
+        
+                            res.on("end", () => {
+                                const location = JSON.parse(data);
+                                console.log(`City: ${location.city}`);
+                                console.log(`Region: ${location.region}`);
+                                console.log(`Country: ${location.country}`);
+        
+                                getCountryName(location.country)
+                                .then((fullName) => {
+                                    console.log("location = " + fullName)
+                                    console.log('Check Location Successful')
                                     resolve(fullName)
                                     // document.getElementById("countryServer").innerHTML = fullName;
                                     // document.getElementById("Location_icon").style.color = "green";
@@ -84,15 +136,20 @@ function checkLocation(url) {
                         .on("error", (err) => {
                             // document.getElementById("Location_icon").style.color = "red";
                             console.error(`IP geolocation failed: ${err}`);
+
+                            
+                            
                             reject(err);
                         });
-                }
+                    }
+                };
             });
+        
 
-            console.log('Check Location Successful')
+            
             // resolve(err, address, family)
-        }, 500)
-    })
-}
+        }, 500);
+    });
+};
 
 module.exports = { checkLocation }

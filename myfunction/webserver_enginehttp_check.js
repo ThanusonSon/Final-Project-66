@@ -45,13 +45,16 @@ function checkWebServerEngineHTTP(url) {
                 reject(error);
             });
         } else {
+            console.log("engine http function into else")
 
-            const new_url = new URL(url)
-            const url_en = "https://"+new_url.host
+            const new_url = url
+            // const url_en = "https://"+new_url.host
+            const url_en = "https://"+new_url
+            console.log("from else https === "+url_en)
 
 
             try{
-                https.get(url , (res) => {
+                https.get(url_en , (res) => {
                     let header = res.headers["server"];
                     console.log(`The HTTP server engine is: ${header}`);
                     nginxServer = header.split("-");
@@ -64,11 +67,13 @@ function checkWebServerEngineHTTP(url) {
                 });
             } catch (error){
 
-                // const new_url = new URL(url)
-                // const url_en = "https://"+new_url.host
+                const new_url = url
+                // const url_en = "http://"+new_url.host
+                const url_en = "http://"+new_url
+                console.log("from else http === "+url_en)
 
 
-                http.get(url , (res) => {
+                http.get(url_en , (res) => {
                     let header = res.headers["server"];
                     console.log(`The HTTP server engine is: ${header}`);
                     nginxServer = header.split("-");
