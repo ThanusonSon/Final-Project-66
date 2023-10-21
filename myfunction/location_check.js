@@ -5,7 +5,7 @@ const http = require("http");
 
 
 function checkLocation(url) {
-    console.log(url+" from func")
+    console.log(url+" from function checkLocation")
     return new Promise(function (resolve, reject) {
         setTimeout(function () {
 
@@ -31,11 +31,12 @@ function checkLocation(url) {
                 //===============================================================================================
 
 
-            // const new_url_for_dns = new URL(url);
-            // const dns_url = new_url_for_dns.host
+            const new_url_for_dns = new URL(url);
+            const dns_url = new_url_for_dns.hostname
 
             // url = new URL(url);
-            // console.log("DNS URL = "+url);
+            url = new_url_for_dns.hostname
+            console.log("DNS URL = "+url);
             
             dns.lookup(url, (err, address, family) => {
 
