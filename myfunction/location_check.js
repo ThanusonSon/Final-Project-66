@@ -62,20 +62,20 @@ function checkLocation(url) {
                                 console.log(`Region: ${location.region}`);
                                 console.log(`Country: ${location.country}`);
         
-                                getCountryName(location.country)
-                                .then((fullName) => {
-                                    console.log("location = " + fullName)
-                                    resolve(fullName)
-                                    // document.getElementById("countryServer").innerHTML = fullName;
-                                    // document.getElementById("Location_icon").style.color = "green";
-                                }) // outputs "United States of America"
-                                .catch((error) => {
-                                    console.error(error)
-                                    reject(error)
-                                    // document.getElementById("countryServer").innerHTML = "API Error";
-                                    // document.getElementById("Location_icon").style.color = "red";
-                                    
-                                });
+                                getCountryName(location.country).then((fullName) => {
+                                        console.log("location sdadasd= " + fullName)
+                                        resolve(fullName)
+                                        console.log('Check Location Successful')
+                                        // document.getElementById("countryServer").innerHTML = fullName;
+                                        // document.getElementById("Location_icon").style.color = "green";
+                                        // outputs "United States of America"
+                                    }).catch((error) => {
+                                        console.error(error)
+                                        reject(error)
+                                        // document.getElementById("countryServer").innerHTML = "API Error";
+                                        // document.getElementById("Location_icon").style.color = "red";
+                                        
+                                    });
         
                                 // https://restcountries.com/#api-endpoints-v2-full-name
                                 // https://restcountries.com/v2/name/US?fullText=true
@@ -89,7 +89,7 @@ function checkLocation(url) {
                 }
             });
 
-            console.log('Check Location Successful')
+            
             // resolve(err, address, family)
         }, 500)
     })

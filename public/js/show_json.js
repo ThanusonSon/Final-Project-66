@@ -2,7 +2,7 @@
 
 
 var currentDate = new Date();
-
+let count_print = 1;
 // @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
 document.addEventListener("DOMContentLoaded", function () {
     // C:\Users\ratha\Downloads\vulnerability_web\public\python\zap_report.json
@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const alertTable = document.getElementById("alertTable").getElementsByTagName('tbody')[0];
             let number = 0;
             data.alerts.forEach(alert => {
-                let count_rick = 0;
-                count_print = 1;
+                
                 
                 const row = alertTable.insertRow();
                 const pluginIdCell = row.insertCell(0);
@@ -97,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 modalBody.classList.add("modal-body");
                 
 
-                
+                let count_rick = 0;
                 alert.instances.forEach(instance => {
                     if (instance.uri == ""){
                         instance.uri = " - "
@@ -118,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         instance.solution = " - "
                     }
 
-                    if (count_print == 1){
+                    if (count_rick == 1){
                         modalBody.innerHTML += `<p><b>Description:</b>${alert.desc.replace(/<p>|<\/p>/g, '')}</p><hr>
                         <p><b>Solution:</b> ${alert.solution.replace(/<p>|<\/p>/g, '')}</p><hr>
                                             <p><b>URI:</b> ${instance.uri}</p>
@@ -128,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                            <p><b>Evidence:</b> ${instance.evidence}</p>
                                            <hr>`;
                     }
-                    if(count_print > 1){
+                    if(count_rick > 1){
                         modalBody.innerHTML += `<p><b>URI:</b> ${instance.uri}</p>
                                             <p><b>Method:</b> ${instance.method}</p>
                                             <p><b>Parameter:</b> ${instance.param}</p>

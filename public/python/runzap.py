@@ -1,3 +1,5 @@
+# นี่คืออัพเดท วันที่ 22-ตุลา-23 เวลา ตี 3 
+
 from zapv2 import ZAPv2
 import time
 import sys
