@@ -56,7 +56,7 @@ document.getElementById('scanvulbtn').addEventListener('click', () => {
     fetchCertificate(inputUrl);
     fetchLocation(inputUrl);
     fetchWebserverEnginehttp(inputUrl);
-    // fetchScanvul(inputUrl);
+    fetchScanvul(inputUrl);
 });
 
 
