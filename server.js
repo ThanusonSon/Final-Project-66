@@ -22,6 +22,7 @@ const get_sql = require('./myfunction/login')
 const sendlink = require('./myfunction/server_sendlink')
 
 const { exec } = require('child_process');
+const { error } = require('console');
 
 // app.use('/', express.static('public'))
 // app.use(express.static('files'))
@@ -114,7 +115,18 @@ app.get('/',function(req,res){
     express.res.sendFile(path.join(__dirname + '/public/index.html'))
 })
 
+app.post('/signup',async(req, res)=>{
+    let username = req.body.user_name;
+    let email = req.body.email;
+    let pass = req.body.pass;
 
+    if (username && email && pass){
+        connection.query("INSERT INTO user (username, email, passwd) VALUES (?,?,?)",[username,email,pass],function(error,result,fields){
+            // alert('Signup Success')
+            res.redirect('/index');
+        });
+    }
+});
 app.post('/auth', async(req, res)=> {
     // console.log('server get sql working...')
     let sqlreqEmail = req.body.email;
@@ -124,10 +136,9 @@ app.post('/auth', async(req, res)=> {
     if (sqlreqEmail && sqlreqPass){
         connection.query('SELECT * FROM user WHERE email = ? AND passwd = ?', [sqlreqEmail, sqlreqPass], function(error, results, fields){
             if (error) throw error;
-            if (results.length >0){
+            if (results.length > 0){
                 req.session.loggedin = true;
 				req.session.username = sqlreqEmail;
-                // res.sendFile(path.join(__dirname + '/public/scan_web_ver.html'));
                 res.redirect('/public/scan_web_ver');
             }else{
                 res.send('Incorrect Username and/or Password!');
@@ -139,22 +150,14 @@ app.post('/auth', async(req, res)=> {
         res.send('Please enter Username and Password!');
 		res.end();
     }
-    // try {
-    //     const sqlResult = await get_sql.getSQL(sqlreqEmail, sqlreqPass);
-
-    //     // console.log(result);
-    //     res.send(sqlResult);
-    // } catch (error) {
-    //     console.log(error);
-    //     res.status(500).send('An error SQL Request.')
-    // }
 });
-
-
+// res.redirect('/index.html');
+app.get('/index',function(req,res){
+    res.redirect('/index.html');
+});
 app.get('/public/scan_web_ver',function(req ,res){
     if (req.session.loggedin){
         res.redirect('/scan_web_ver.html');
-        // res.sendFile(path.join(__dirname + '/public/scan_web_ver.html'))
     }else{
         res.send('Please login to view this page!');
     }

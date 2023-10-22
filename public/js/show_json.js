@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         instance.solution = " - "
                     }
 
-                    if (count_rick == 1){
+                    if (count_rick <= 1){
                         modalBody.innerHTML += `<p><b>Description:</b>${alert.desc.replace(/<p>|<\/p>/g, '')}</p><hr>
                         <p><b>Solution:</b> ${alert.solution.replace(/<p>|<\/p>/g, '')}</p><hr>
                                             <p><b>URI:</b> ${instance.uri}</p>
@@ -135,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                             <p><b>Evidence:</b> ${instance.evidence}</p>
                                             <hr>`;
                     }
+                    
                     count_rick += 1;
                     
                     

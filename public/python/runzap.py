@@ -1,5 +1,3 @@
-# นี่คืออัพเดท วันที่ 22-ตุลา-23 เวลา ตี 3 
-
 from zapv2 import ZAPv2
 import time
 import sys
@@ -9,7 +7,7 @@ import webbrowser
 print("python ready to run")
 
 def fix_url(url):
-    if not url.startswith('http://') and not url.startswith('https://'):
+    if not url.startswith('https://') and not url.startswith('http://'):
         url = 'https://' + url
     return url
 
@@ -47,20 +45,18 @@ def run_zap_scan(url):
             hosts_data = report_json['site'][0]['hosts']
         else:
             hosts_data = None
-            print('No hosts data found in the report.')
 
         if 'alertsSummary' in report_json['site'][0]:
             alerts_summary_data = report_json['site'][0]['alertsSummary']
         else:
             alerts_summary_data = None
-            print('No alertsSummary data found in the report.')
 
         # บันทึกรายงานในไฟล์
         report_file_name = './public/python/zap_report.json'  # ชื่อไฟล์ที่ต้องการบันทึกรายงาน
         # with open(report_file_name, 'w', encoding='utf-8') as report_file:
         #     report_file.write(report_html)
         # print(f'Scan report saved to: {report_file_name}')
-        with open(report_file_name, 'w', encoding='utf-8') as report_file:
+        with open(report_file_name, 'w+', encoding='utf-8') as report_file:
             scan_report = {
                 'site': target_url,
                 'alerts': report_json['site'][0]['alerts'],  
