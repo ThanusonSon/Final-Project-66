@@ -192,7 +192,9 @@ app.get('/location', async (req, res) => {
 
     try {
         const locationResult = await check_Location.checkLocation(url);
-        console.log('location is = ' +locationResult);
+        console.log('location from server is = ' ,locationResult);
+        console.log('location from server is = ' +locationResult.fullName);
+        console.log('location from server is = ' +locationResult.location.country);
         res.send(locationResult);
     } catch (error) {
         console.log(error);
@@ -208,7 +210,7 @@ app.get('/webserver', async (req, res) => {
 
     try {
         const webserverResult = await check_WebServerEngineHTTP.checkWebServerEngineHTTP(url);
-        console.log(webserverResult);
+        console.log("webserverResult from server = ", webserverResult);
         res.send(webserverResult);
     } catch (error) {
         console.error(error);

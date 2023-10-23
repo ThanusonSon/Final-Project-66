@@ -34,7 +34,7 @@
     "node-fetch": "^3.3.2",
     "nodemon": "^3.0.1",
     "request": "^2.88.2",
-    "require": "^2.4.20",
+    "require": "^0.4.4",
     "ssl-checker": "^2.0.8"
   }
 }

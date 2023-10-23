@@ -154,8 +154,13 @@ body {
                 <div class="Location">
                     <i class="bi bi-geo-alt"></i>
                     <b>Location</b><br>
+
                     <span id="status"></span><span id="icon_loc"></span><span id="countryServer">Checking</sapn>
+                        
                 </div>
+                <div id="map" style="width: 400px; height: 300px;"></div>
+
+
               </div>
               <div class="col-sm">
                 <div class="http">
@@ -197,6 +202,13 @@ body {
 
     <script src="./js/show_json.js"></script>
     <script src="./js/button_script.js"></script>
+    <script>
+        const [latitude, longitude] = [/* Your obtained latitude and longitude */];
+
+        const map = L.map('map').setView([latitude, longitude], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.marker([latitude, longitude]).addTo(map).bindPopup('Location').openPopup();
+    </script>
     <!-- <script>
         window.opener.postMessage('closeModal', '*');
     </script> -->

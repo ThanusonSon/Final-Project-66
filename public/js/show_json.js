@@ -265,23 +265,24 @@ function fetchLocation(url) {
     // const not_check = '<i class="bi bi-x-circle-fill"></i>';
     // show_icon = document.getElementById("icon_loc");
     
+    
     try {
-        fetch(`/Location?url=${url}`)
+        fetch(`/location?url=${url}`)
             .then(response => {
-                console.log(response);
                 if (!response.ok) {
                     error;
                 }
-                return response.text();
+                return response.json()
             })
             .then(locationResult => {
-                console.log('Client result = ' + locationResult);
+                console.log('Client result 1  = ', locationResult.fullName);
+                console.log('Client result 2  = ', locationResult.location);
 
                 const countryServerElement = document.getElementById("countryServer");
                 // const locationIconElement = document.getElementById("Location_icon");
 
-                countryServerElement.innerHTML = " "+locationResult;
-                flags_country(locationResult);
+                countryServerElement.innerHTML = " "+ locationResult.fullName;
+                flags_country(locationResult.fullName);
                 // locationIconElement.style.color = 'green';
             })
             .catch(error => {
@@ -297,6 +298,8 @@ function fetchLocation(url) {
         // locationIconElement.style.color = 'red';
 
     }
+
+    
 }
 
 

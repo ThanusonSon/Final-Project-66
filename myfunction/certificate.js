@@ -8,15 +8,16 @@ function certificateChecker(url_arg) {
             let check = url_arg;
             let url = '';
 
-            if (url_arg.includes("://")) {
+            if (url_arg.startsWith("https://") || url_arg.startsWith("http://")) {
                 url = new URL(check).hostname;
             } else {
                 url = url_arg;
             }
 
-            console.log('check certificate valid');
+            
 
             sslChecker(url, "GET", 443).then((result) => {
+                console.log('check certificate function Working');
                 let check_day = Math.sign(result['daysRemaining']);
                 resolve(result, check_day);
             });
