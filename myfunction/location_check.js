@@ -14,7 +14,10 @@ function checkLocation(url) {
             // const axios = require('axios');
 
             //===============================================================================================
-
+            
+            
+            
+            // http://api.geonames.org/countryInfoJSON?username=location_f&country=SG
             async function getCountryName(abbreviation) {
                 try {
                     const response = await axios.get(`http://api.geonames.org/countryInfoJSON?username=location_f&country=${abbreviation}`);
@@ -64,8 +67,12 @@ function checkLocation(url) {
         
                                 getCountryName(location.country).then((fullName) => {
                                         console.log("location sdadasd= " + fullName)
-                                        resolve(fullName)
+                                        // console.log("location object = "+location)
                                         console.log('Check Location Successful')
+                                        
+                                        resolve(fullName)
+                                        
+                                        
                                         // document.getElementById("countryServer").innerHTML = fullName;
                                         // document.getElementById("Location_icon").style.color = "green";
                                         // outputs "United States of America"

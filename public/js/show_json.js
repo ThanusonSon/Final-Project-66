@@ -194,7 +194,6 @@ async function fetchCertificate(url) {
         const response = await fetch(`/certificate?url=${url}`);
         const certificateResult = await response.json();
 
-
         let result_cert = certificateResult["daysRemaining"];
         console.log('result cert = ' + result_cert);
 
@@ -230,7 +229,7 @@ async function fetchCertificate(url) {
             // document.getElementById('Certificate_icon').style.color = 'red';
             show_icon.innerHTML = not_check
             show_icon.style.color = "#FF3A00"
-           show_result.innerText = " " + result_cert+' Days remaining expire';
+            show_result.innerText = " " + result_cert+' Days remaining expire';
             console.log('Client function fetchCertificate Success');
         } else {
             //document.getElementsByClassName('show_cer').innerHTML = result_cert + ' Invalid'
@@ -256,7 +255,7 @@ async function fetchCertificate(url) {
 
 
 
-function fetchLocation(url) {
+async function fetchLocation(url) {
     // url_text = url.split("//");
     // url = url_text[1];
     console.log("DNS URL = "+url);
@@ -268,19 +267,22 @@ function fetchLocation(url) {
     try {
         fetch(`/Location?url=${url}`)
             .then(response => {
-                console.log(response);
                 if (!response.ok) {
                     error;
                 }
                 return response.text();
             })
             .then(locationResult => {
+                // const locationResults = JSON.parse(locationResult);
+                // const response = await fetch(`/Location?url=${url}`);
+                // const asd = await response.json();
                 console.log('Client result = ' + locationResult);
 
                 const countryServerElement = document.getElementById("countryServer");
                 // const locationIconElement = document.getElementById("Location_icon");
 
                 countryServerElement.innerHTML = " "+locationResult;
+                //console.log('City : '+city);;
                 flags_country(locationResult);
                 // locationIconElement.style.color = 'green';
             })
@@ -437,3 +439,13 @@ function flags_country(country_server){
 
 }
 
+async function getCountryName(abbreviation) {
+    try {
+        const response = await axios.get(`http://api.geonames.org/countryInfoJSON?username=location_f&country=${abbreviation}`);
+        const data = response.data.geonames[0];
+        return data.countryName;
+    } catch (error) {
+        console.error(error);
+        throw new Error(`Failed to get full name for ${abbreviation}`);
+    }
+    }

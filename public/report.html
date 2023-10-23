@@ -129,7 +129,9 @@ body {
 #detail{
     background-color: none;
 }
-
+#location_detail{
+    background-color: red;
+}
 
     
 
@@ -154,7 +156,7 @@ body {
                 <div class="Location">
                     <i class="bi bi-geo-alt"></i>
                     <b>Location</b><br>
-                    <span id="status"></span><span id="icon_loc"></span><span id="countryServer">Checking</sapn>
+                    <span id="status"></span><span id="icon_loc"></span><span id="countryServer">Checking</sapn><div id="location_detail"></div>
                 </div>
               </div>
               <div class="col-sm">
@@ -197,6 +199,7 @@ body {
 
     <script src="./js/show_json.js"></script>
     <script src="./js/button_script.js"></script>
+    <script src="../myfunction/location_check.js"></script>
     <!-- <script>
         window.opener.postMessage('closeModal', '*');
     </script> -->

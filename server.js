@@ -4,6 +4,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
 const mysql = require('mysql');
+const fs = require('fs');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -141,7 +142,7 @@ app.post('/auth', async(req, res)=> {
 				req.session.username = sqlreqEmail;
                 res.redirect('/public/scan_web_ver');
             }else{
-                res.send('Incorrect Username and/or Password!');
+                res.redirect('/index');
                 
             }
             res.end();
