@@ -19,10 +19,21 @@ function checkWebServerEngineHTTP(url) {
             https.get(url_en , (res) => {
                 let header = res.headers["server"];
                 console.log(`The HTTP server engine is: ${header}`);
-                nginxServer = header.split("-");
-                if (nginxServer[0] == "nginx"){
-                    CheckVersionNginx(header);
-                }
+                // console.log("===");
+                // console.log("===", header);
+                // if (header.indexOf('-') > -1)
+                // {
+                //     let Servername = header.split("-");
+                // }
+
+                // let Servername = header.split("/");
+                // console.log("split data = ",Servername)
+                // console.log("split data = ",header.split("-"))
+                // if (header.toLowerCase() == "nginx"){
+                //     CheckVersionNginx(header);
+                // }else if (header[0].toLowerCase() == "apache"){
+                //     getLatestApacheVersion(header)
+                // }
                 resolve(header);
             }).on('error', (error) => {
                 reject(error);
@@ -34,10 +45,12 @@ function checkWebServerEngineHTTP(url) {
             http.get(url_en , (res) => {
                 let header = res.headers["server"];
                 console.log(`The HTTP server engine is: ${header}`);
-                nginxServer = header.split("-");
-                if (nginxServer[0] == "nginx"){
-                    CheckVersionNginx(header);
-                }
+                // Servername = header.split("-");
+                // if (Servername[0].toLowerCase() == "nginx"){
+                //     CheckVersionNginx(header);
+                // }else if (Servername[0].toLowerCase() == "apache"){
+                //     getLatestApacheVersion(header)
+                // }
                 resolve(header);
             }).on('error', (error) => {
                 reject(error);
@@ -47,10 +60,12 @@ function checkWebServerEngineHTTP(url) {
                 https.get(url_en , (res) => {
                     let header = res.headers["server"];
                     console.log(`The HTTP server engine is: ${header}`);
-                    nginxServer = header.split("-");
-                    if (nginxServer[0] == "nginx"){
-                        CheckVersionNginx(header);
-                    }
+                    // Servername = header.split("-");
+                    // if (Servername[0].toLowerCase() == "nginx"){
+                    //     CheckVersionNginx(header);
+                    // }else if (Servername[0].toLowerCase() == "apache"){
+                    //     getLatestApacheVersion(header)
+                    // }
                     resolve(header);
                 }).on('error', (error) => {
                     reject(error);
@@ -59,10 +74,12 @@ function checkWebServerEngineHTTP(url) {
                 http.get(url_en , (res) => {
                     let header = res.headers["server"];
                     console.log(`The HTTP server engine is: ${header}`);
-                    nginxServer = header.split("-");
-                    if (nginxServer[0] == "nginx"){
-                        CheckVersionNginx(header);
-                    }
+                    // Servername = header.split("-");
+                    // if (Servername[0].toLowerCase() == "nginx"){
+                    //     CheckVersionNginx(header);
+                    // }else if (Servername[0].toLowerCase() == "apache"){
+                    //     getLatestApacheVersion(header)
+                    // }
                     resolve(header);
                 }).on('error', (error) => {
                     reject("No Engine HTTP");
@@ -72,6 +89,9 @@ function checkWebServerEngineHTTP(url) {
         
     })
 }
+
+
+
 
 
 
@@ -98,24 +118,49 @@ function CheckVersionNginx(version){
                 let linkDownload_Windows = 'https://nginx.org/download/nginx-'+latest+'.zip';
                 console.log(linkDownload_Windows);
                 console.log(linkDownload_Linux);
-                resolve (linkDownload_Linux,linkDownload_Windows);
+                const result = {
+                    oldVersion: version,
+                    newVersion:latestVersion,
+                    windows:linkDownload_Windows,
+                    linux:linkDownload_Linux
+                }
+                resolve (result);
             }else if(version_position[1] != latest_position[1] && version_position[1] < latest_position[1]){
                 console.log(`The latest stable version of Nginx is: ${latest}`);
                 let linkDownload_Linux = 'https://nginx.org/download/nginx-'+latest+'.tar.gz';
                 let linkDownload_Windows = 'https://nginx.org/download/nginx-'+latest+'.zip';
                 console.log(linkDownload_Windows);
                 console.log(linkDownload_Linux);
-                resolve (linkDownload_Linux,linkDownload_Windows);
+                const result = {
+                    oldVersion: version,
+                    newVersion:latestVersion,
+                    windows:linkDownload_Windows,
+                    linux:linkDownload_Linux
+                }
+                resolve (result);
             }else if(version_position[2] != latest_position[2] && version_position[2] < latest_position[2]){
                 console.log(`The latest stable version of Nginx is: ${latest}`);
                 let linkDownload_Linux = 'https://nginx.org/download/nginx-'+latest+'.tar.gz';
                 let linkDownload_Windows = 'https://nginx.org/download/nginx-'+latest+'.zip';
                 console.log(linkDownload_Windows);
                 console.log(linkDownload_Linux);
-                resolve (linkDownload_Linux,linkDownload_Windows);
+                const result = {
+                    oldVersion: version,
+                    newVersion:latestVersion,
+                    windows:linkDownload_Windows,
+                    linux:linkDownload_Linux
+                }
+                resolve (result);
             }else{
                 let return_text = "Current is latest";
                 console.log(return_text);
+                // const result = {
+                //     oldVersion: version,
+                //     newVersion:latestVersion,
+                //     windows:linkDownload_Windows,
+                //     linux:linkDownload_Linux
+                // }
+                // resolve (result)
                 resolve(return_text);
             }
 
@@ -123,7 +168,7 @@ function CheckVersionNginx(version){
             console.error('Latest stable version not found on the page.');
         }
         } else {
-        console.error('Failed to retrieve the Nginx website.');
+            console.error('Failed to retrieve the Nginx website.');
         }
     })
     .catch((error) => {
@@ -168,7 +213,7 @@ async function getLatestApacheVersion() {
   }
 }
 
-getLatestApacheVersion();
+// getLatestApacheVersion();
 
 
 

@@ -255,7 +255,7 @@ async function fetchCertificate(url) {
 
 
 
-async function fetchLocation(url) {
+function fetchLocation(url) {
     // url_text = url.split("//");
     // url = url_text[1];
     console.log("DNS URL = "+url);
@@ -264,26 +264,29 @@ async function fetchLocation(url) {
     // const not_check = '<i class="bi bi-x-circle-fill"></i>';
     // show_icon = document.getElementById("icon_loc");
     
+    
     try {
-        fetch(`/Location?url=${url}`)
+        fetch(`/location?url=${url}`)
             .then(response => {
                 if (!response.ok) {
                     error;
                 }
-                return response.text();
+                return response.json()
             })
             .then(locationResult => {
-                // const locationResults = JSON.parse(locationResult);
-                // const response = await fetch(`/Location?url=${url}`);
-                // const asd = await response.json();
-                console.log('Client result = ' + locationResult);
+                console.log('Client result 1  = ', locationResult.fullName);
+                console.log('Client result 2  = ', locationResult.location.city);
 
                 const countryServerElement = document.getElementById("countryServer");
+                const location_detail = document.getElementById("loc_del");
+                console.log(location_detail);
                 // const locationIconElement = document.getElementById("Location_icon");
-
-                countryServerElement.innerHTML = " "+locationResult;
-                //console.log('City : '+city);;
-                flags_country(locationResult);
+                console.log("City :",locationResult.location.city,"Region :",locationResult.location.region);
+                location_detail.innerHTML = "City : "+locationResult.location.city+" <br>Region : "+locationResult.location.region;
+                location_detail.style.fontSize = "16px";
+                location_detail.style.color = "#FFFFFF";
+                countryServerElement.innerHTML = " "+ locationResult.fullName;
+                flags_country(locationResult.fullName);
                 // locationIconElement.style.color = 'green';
             })
             .catch(error => {
@@ -299,6 +302,8 @@ async function fetchLocation(url) {
         // locationIconElement.style.color = 'red';
 
     }
+
+    
 }
 
 
@@ -321,7 +326,7 @@ function fetchWebserverEnginehttp(url) {
                 return response.text();
             })
             .then(WebserverEnginehttpResult => {
-                console.log('Client result == ' + WebserverEnginehttpResult);
+                console.log('Client result server == ', WebserverEnginehttpResult);
                 
                 // const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
                 const serverHTTPElement = document.getElementById("serverHTTP");
@@ -438,14 +443,3 @@ function flags_country(country_server){
     });
 
 }
-
-async function getCountryName(abbreviation) {
-    try {
-        const response = await axios.get(`http://api.geonames.org/countryInfoJSON?username=location_f&country=${abbreviation}`);
-        const data = response.data.geonames[0];
-        return data.countryName;
-    } catch (error) {
-        console.error(error);
-        throw new Error(`Failed to get full name for ${abbreviation}`);
-    }
-    }

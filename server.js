@@ -193,7 +193,9 @@ app.get('/location', async (req, res) => {
 
     try {
         const locationResult = await check_Location.checkLocation(url);
-        console.log('location is = ' +locationResult);
+        console.log('location from server is = ' +locationResult);
+        console.log('location from server is = ' , locationResult.fullName);
+        console.log('location from server is = ' , locationResult.location);
         res.send(locationResult);
     } catch (error) {
         console.log(error);
