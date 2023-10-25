@@ -194,7 +194,6 @@ async function fetchCertificate(url) {
         const response = await fetch(`/certificate?url=${url}`);
         const certificateResult = await response.json();
 
-
         let result_cert = certificateResult["daysRemaining"];
         console.log('result cert = ' + result_cert);
 
@@ -230,7 +229,7 @@ async function fetchCertificate(url) {
             // document.getElementById('Certificate_icon').style.color = 'red';
             show_icon.innerHTML = not_check
             show_icon.style.color = "#FF3A00"
-           show_result.innerText = " " + result_cert+' Days remaining expire';
+            show_result.innerText = " " + result_cert+' Days remaining expire';
             console.log('Client function fetchCertificate Success');
         } else {
             //document.getElementsByClassName('show_cer').innerHTML = result_cert + ' Invalid'
@@ -276,11 +275,16 @@ function fetchLocation(url) {
             })
             .then(locationResult => {
                 console.log('Client result 1  = ', locationResult.fullName);
-                console.log('Client result 2  = ', locationResult.location);
+                console.log('Client result 2  = ', locationResult.location.city);
 
                 const countryServerElement = document.getElementById("countryServer");
+                const location_detail = document.getElementById("loc_del");
+                console.log(location_detail);
                 // const locationIconElement = document.getElementById("Location_icon");
-
+                console.log("City :",locationResult.location.city,"Region :",locationResult.location.region);
+                location_detail.innerHTML = "City : "+locationResult.location.city+" <br>Region : "+locationResult.location.region;
+                location_detail.style.fontSize = "16px";
+                location_detail.style.color = "#FFFFFF";
                 countryServerElement.innerHTML = " "+ locationResult.fullName;
                 flags_country(locationResult.fullName);
                 // locationIconElement.style.color = 'green';
@@ -322,7 +326,7 @@ function fetchWebserverEnginehttp(url) {
                 return response.text();
             })
             .then(WebserverEnginehttpResult => {
-                console.log('Client result == ' + WebserverEnginehttpResult);
+                console.log('Client result server == ', WebserverEnginehttpResult);
                 
                 // const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
                 const serverHTTPElement = document.getElementById("serverHTTP");
@@ -439,4 +443,3 @@ function flags_country(country_server){
     });
 
 }
-

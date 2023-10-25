@@ -1,17 +1,17 @@
 const dns = require("dns");
-const axios = require('axios');
+const axios = require("axios");
 const https = require("https");
 
-
 function checkLocation(url) {
-    console.log(url+" from func")
-    return new Promise(function (resolve, reject) {
-        setTimeout(function () {
+  console.log(url + " from func");
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      // check Location
 
-            // check Location
+      // const dns = require("dns");
+      // const axios = require('axios');
 
-            // const dns = require("dns");
-            // const axios = require('axios');
+      //===============================================================================================
 
             //===============================================================================================
             
@@ -31,98 +31,91 @@ function checkLocation(url) {
             
                 //===============================================================================================
 
-                // Import Leaflet library
-                const L = require('leaflet');
+                // // Import Leaflet library
+                // const L = require('leaflet');
 
-                // Create a map centered at the specified latitude and longitude
-                const map = L.map('map').setView([13.7563, 100.5018], 15);
+                // // Create a map centered at the specified latitude and longitude
+                // const map = L.map('map').setView([13.7563, 100.5018], 15);
 
-                // Add a tile layer (you can use different tile providers)
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
+                // // Add a tile layer (you can use different tile providers)
+                // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                //     maxZoom: 19,
+                //     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                // }).addTo(map);
 
-                // Add a marker at the specified latitude and longitude
-                L.marker([13.7563, 100.5018]).addTo(map)
-                    .bindPopup('This is your location!')
-                    .openPopup();
+                // // Add a marker at the specified latitude and longitude
+                // L.marker([13.7563, 100.5018]).addTo(map)
+                //     .bindPopup('This is your location!')
+                //     .openPopup();
 
 
 
-            // const new_url_for_dns = new URL(url);
-            // const dns_url = new_url_for_dns.host
+      // url = new URL(url);
+      // console.log("DNS URL = "+url);
 
-            // url = new URL(url);
-            // console.log("DNS URL = "+url);
-            
-            dns.lookup(url, (err, address, family) => {
+      dns.lookup(url, (err, address, family) => {
+        // http://www.nkk.ac.th/
+        if (err) {
+          // document.getElementById("Location_icon").style.color = "green";
+          console.error(`DNS lookup failed: ${err}`);
+          reject(err);
+        } else {
+          console.log(`IP address: ${address}`);
+          console.log(`Address family: IPv${family}`);
+          // resolve(address, family)
 
-                // http://www.nkk.ac.th/
-                if (err) {
+          https
+            .get("https://ipinfo.io/" + address + "/json", (res) => {
+              let data = "";
+
+              res.on("data", (chunk) => {
+                data += chunk;
+              });
+
+              res.on("end", () => {
+                const location = JSON.parse(data);
+                console.log(`City: ${location.city}`);
+                console.log(`Region: ${location.region}`);
+                console.log(`Country: ${location.country}`);
+
+                getCountryName(location.country)
+                  .then((fullName) => {
+                    console.log("location sdadasd= " + fullName);
+                    // console.log("location object = "+location)
+                    console.log("Check Location Successful");
+
+                    const result = {
+                        fullName: fullName,
+                        location: location
+                    };
+                    resolve(result);
+
+                    // document.getElementById("countryServer").innerHTML = fullName;
                     // document.getElementById("Location_icon").style.color = "green";
-                    console.error(`DNS lookup failed: ${err}`);
-                    reject(err)
-                } else {
-                    console.log(`IP address: ${address}`);
-                    console.log(`Address family: IPv${family}`);
-                    // resolve(address, family)
-        
-        
-                    https
-                        .get("https://ipinfo.io/" + address + "/json", (res) => {
-                            let data = "";
-        
-                            res.on("data", (chunk) => {
-                                data += chunk;
-                            });
-        
-                            res.on("end", () => {
-                                const location = JSON.parse(data);
-                                console.log(`City: ${location.city}`);
-                                console.log(`Region: ${location.region}`);
-                                console.log(`Country: ${location.country}`);
-        
-                                getCountryName(location.country).then((fullName) => {
-                                        console.log("location sdadasd= " + fullName)
-                                        // console.log("location object = "+location)
-                                        console.log('Check Location Successful')
+                    // outputs "United States of America"
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                    reject(error);
+                    // document.getElementById("countryServer").innerHTML = "API Error";
+                    // document.getElementById("Location_icon").style.color = "red";
+                  });
 
-                                        const result = {
-                                            fullName: fullName,
-                                            location: location
-                                        };
-                                        
-                                        resolve(result)
-                                        
-                                        
-                                        // document.getElementById("countryServer").innerHTML = fullName;
-                                        // document.getElementById("Location_icon").style.color = "green";
-                                        // outputs "United States of America"
-                                    }).catch((error) => {
-                                        console.error(error)
-                                        reject(error)
-                                        // document.getElementById("countryServer").innerHTML = "API Error";
-                                        // document.getElementById("Location_icon").style.color = "red";
-                                        
-                                    });
-        
-                                // https://restcountries.com/#api-endpoints-v2-full-name
-                                // https://restcountries.com/v2/name/US?fullText=true
-                            });
-                        })
-                        .on("error", (err) => {
-                            // document.getElementById("Location_icon").style.color = "red";
-                            console.error(`IP geolocation failed: ${err}`);
-                            reject(err);
-                        });
-                }
+                // https://restcountries.com/#api-endpoints-v2-full-name
+                // https://restcountries.com/v2/name/US?fullText=true
+              });
+            })
+            .on("error", (err) => {
+              // document.getElementById("Location_icon").style.color = "red";
+              console.error(`IP geolocation failed: ${err}`);
+              reject(err);
             });
+        }
+      });
 
-            
-            // resolve(err, address, family)
-        }, 500)
-    })
+      // resolve(err, address, family)
+    }, 500);
+  });
 }
 
-module.exports = { checkLocation }
+module.exports = { checkLocation };
