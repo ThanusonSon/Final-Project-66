@@ -31,6 +31,24 @@ function checkLocation(url) {
             
                 //===============================================================================================
 
+                // Import Leaflet library
+                const L = require('leaflet');
+
+                // Create a map centered at the specified latitude and longitude
+                const map = L.map('map').setView([13.7563, 100.5018], 15);
+
+                // Add a tile layer (you can use different tile providers)
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Add a marker at the specified latitude and longitude
+                L.marker([13.7563, 100.5018]).addTo(map)
+                    .bindPopup('This is your location!')
+                    .openPopup();
+
+
 
             // const new_url_for_dns = new URL(url);
             // const dns_url = new_url_for_dns.host
