@@ -282,14 +282,26 @@ function fetchLocation(url) {
                 a = document.createElement('a');
                 location_city = "City : "+locationResult.location.city+", Region : "+locationResult.location.region;
                 var linkText = document.createTextNode(location_city);
-                // const query = "Your Marker Text"; // เปลี่ยนเป็นข้อความที่คุณต้องการใช้บนหมุด
+
 
                 // const googleMapsUrl = https://www.google.com/maps?q=${loc}&query=${encodeURIComponent(query)};
                 a.appendChild(linkText);
+                a.title = "Find Location on Google map";
                 googleMapsUrl = "https://www.google.com/maps/@"+locationResult.location.loc+",14z?entry=ttu";
                 a.href = googleMapsUrl;
                 location_detail.appendChild(a);
                 a.target = '_blank';
+                a.addEventListener("mouseover", function() {
+                    a.style.color = "#ECF426"; 
+                    a.style.text = "20px";
+                    
+                  });
+                  
+                  a.addEventListener("mouseout", function() {
+                    a.style.backgroundColor = ""; 
+                    a.style.color = ""; 
+                    a.style.transform = "scale(1)";
+                  });
 
                 // const locationIconElement = document.getElementById("Location_icon");
                 console.log("City :",locationResult.location.city,"Region :",locationResult.location.region);
