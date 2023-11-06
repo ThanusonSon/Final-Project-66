@@ -1,5 +1,5 @@
 {
-    "site": "https://blog.artijo.com/",
+    "site": "http://testphp.vulnweb.com/",
     "alerts": [
         {
             "pluginid": "40012",
