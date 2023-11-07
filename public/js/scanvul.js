@@ -44,21 +44,14 @@
 //   // ไม่จำเป็นต้องใส่โค้ดในนี้เนื่องจากตัวอย่างเป็นการแสดงผลข้อมูลเท่านั้น
 // }
 
-
-
-
 // document.getElementById('outputId').textContent = dataFromServer;
 
-document.getElementById('scanvulbtn').addEventListener('click', () => {
-    // const inputUrl = document.getElementById('inputUrl').value;
-    const inputUrl = document.getElementsByClassName('linkToScan')[0].value;
-    console.log('inputUrl is = ',inputUrl);
-    fetchCertificate(inputUrl);
-    fetchLocation(inputUrl);
-    fetchWebserverEnginehttp(inputUrl);
-    fetchScanvul(inputUrl);
+document.getElementById("scanvulbtn").addEventListener("click", () => {
+  // const inputUrl = document.getElementById('inputUrl').value;
+  const inputUrl = document.getElementsByClassName("linkToScan")[0].value;
+  console.log("inputUrl is = ", inputUrl);
+  fetchScanvul(inputUrl);
 });
-
 
 // document.addEventListener('DOMContentLoaded', () => {
 //     // const url = req.query.url;
@@ -90,31 +83,33 @@ document.getElementById('scanvulbtn').addEventListener('click', () => {
 // const url = req.body.url;
 // processURLFromServer(urlFromServer);
 
-function fetchSQL(email,passwd) {
-    console.log('client function fetchScanvul working...')
-    fetch(`/auth?sqlreqEmail=${email}&sqlreqPass=${passwd}`)
+function fetchSQL(email, passwd) {
+  console.log("client function fetchScanvul working...");
+  fetch(`/auth?sqlreqEmail=${email}&sqlreqPass=${passwd}`)
     ///getsqlreq?sqlreq1=${sqlreq1}&sqlreq2=${sqlreq2}
-    .then(response => response.text())
-    .then(sqlResult => {
-        console.log(sqlResult);
-        console.log(email, pass)
+    .then((response) => response.text())
+    .then((sqlResult) => {
+      console.log(sqlResult);
+      console.log(email, pass);
     })
-    .catch(error => {
-        console.error('Error:', error);
+    .catch((error) => {
+      console.error("Error:", error);
     });
 }
-
-
+function report(){
+  window.location.href = "report.html";
+}
 function fetchScanvul(url) {
-    console.log('client function fetchScanvul working...')
-    fetch(`/scanvul?url=${url}`)
-    .then(response => response.text())
-    .then(pythonResult => {
-        console.log(pythonResult);
-        document.getElementById('scanvul').innerText = pythonResult;
+  console.log("client function fetchScanvul working...");
+  fetch(`/scanvul?url=${url}`)
+    .then((response) => response.text())
+    .then((pythonResult) => {
+      console.log(pythonResult);
+      report();
+      document.getElementById("scanvul").innerText = pythonResult;
     })
-    .catch(error => {
-        console.error('Error:', error);
+    .catch((error) => {
+      console.error("Error:", error);
     });
 }
 
@@ -183,63 +178,56 @@ function fetchScanvul(url) {
 //             console.log('client function fetchCertificate Success');
 //         }
 
-
 //     } catch (error) {
 //         console.error('Error:', error);
 //     }
 //     // fetch()
 //     // .then(response => response.text())
 //     // .then(result => {
-        
-        
-
-
-        
 
 //     // })
 //     // .catch(error => {
-        
+
 //     // });
 
 // }
 
 async function fetchCertificate(url) {
-    console.log('Client function fetchCertificate working...');
+  console.log("Client function fetchCertificate working...");
 
-    try {
-        const response = await fetch(`/certificate?url=${url}`);
-        const certificateResult = await response.json();
+  try {
+    const response = await fetch(`/certificate?url=${url}`);
+    const certificateResult = await response.json();
 
-        let result_cert = certificateResult["daysRemaining"];
-        console.log('result cert = ' + result_cert);
+    let result_cert = certificateResult["daysRemaining"];
+    console.log("result cert = " + result_cert);
 
-        if (certificateResult["valid"] === true && result_cert > 0) {
-            document.getElementById('Certificate_icon').style.color = 'green';
-            document.getElementById("dayremaining").innerText = result_cert + ' remaining';
-            console.log('Client function fetchCertificate Success');
-        } else if (certificateResult["valid"] === true && result_cert < 0) {
-            document.getElementById('Certificate_icon').style.color = 'red';
-            document.getElementById("dayremaining").innerText = 'Expired';
-            console.log('Client function fetchCertificate Success');
-        } else if (certificateResult["valid"] === false) {
-            document.getElementById('Certificate_icon').style.color = 'red';
-            document.getElementById("dayremaining").innerText = 'Fake validate';
-            console.log('Client function fetchCertificate Success');
-        } else {
-            document.getElementById('Certificate_icon').style.color = 'red';
-            document.getElementById("dayremaining").innerText = 'Invalid';
-            console.log('Client function fetchCertificate Success');
-        }
-    } catch (error) {
-        console.log('Error:', error);
+    if (certificateResult["valid"] === true && result_cert > 0) {
+      document.getElementById("Certificate_icon").style.color = "green";
+      document.getElementById("dayremaining").innerText =
+        result_cert + " remaining";
+      console.log("Client function fetchCertificate Success");
+    } else if (certificateResult["valid"] === true && result_cert < 0) {
+      document.getElementById("Certificate_icon").style.color = "red";
+      document.getElementById("dayremaining").innerText = "Expired";
+      console.log("Client function fetchCertificate Success");
+    } else if (certificateResult["valid"] === false) {
+      document.getElementById("Certificate_icon").style.color = "red";
+      document.getElementById("dayremaining").innerText = "Fake validate";
+      console.log("Client function fetchCertificate Success");
+    } else {
+      document.getElementById("Certificate_icon").style.color = "red";
+      document.getElementById("dayremaining").innerText = "Invalid";
+      console.log("Client function fetchCertificate Success");
     }
+  } catch (error) {
+    console.log("Error:", error);
+  }
 }
-
 
 // function fetchLocation(url) {
 //     console.log('client function fetchLocation working...');
-    
-    
+
 //     fetch(`/Location?url=${url}`)
 //     .then(response => response.text())
 //     .then(locationResult => {
@@ -253,42 +241,40 @@ async function fetchCertificate(url) {
 //     });
 // }
 
-
 function fetchLocation(url) {
-    console.log('Client function fetchLocation working...');
-    
-    try {
-        fetch(`/Location?url=${url}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(locationResult => {
-                console.log('Client result = ' + locationResult);
+  console.log("Client function fetchLocation working...");
 
-                const countryServerElement = document.getElementById("countryServer");
-                const locationIconElement = document.getElementById("Location_icon");
-
-                countryServerElement.innerHTML = locationResult;
-                locationIconElement.style.color = 'green';
-            })
-            .catch(error => {
-                console.error('Location Fetch Error:', error);
-            });
-    } catch (error) {
-        console.log('Fetch Error:', error);
+  try {
+    fetch(`/Location?url=${url}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.text();
+      })
+      .then((locationResult) => {
+        console.log("Client result = " + locationResult);
 
         const countryServerElement = document.getElementById("countryServer");
         const locationIconElement = document.getElementById("Location_icon");
 
-        countryServerElement.innerHTML = 'An error occurred while fetching location data.';
-        locationIconElement.style.color = 'red';
-    }
+        countryServerElement.innerHTML = locationResult;
+        locationIconElement.style.color = "green";
+      })
+      .catch((error) => {
+        console.error("Location Fetch Error:", error);
+      });
+  } catch (error) {
+    console.log("Fetch Error:", error);
+
+    const countryServerElement = document.getElementById("countryServer");
+    const locationIconElement = document.getElementById("Location_icon");
+
+    countryServerElement.innerHTML =
+      "An error occurred while fetching location data.";
+    locationIconElement.style.color = "red";
+  }
 }
-
-
 
 // function fetchWebserverEnginehttp(url) {
 //     console.log('client function fetchWebserverEnginehttp working...');
@@ -319,47 +305,47 @@ function fetchLocation(url) {
 // }
 
 function fetchWebserverEnginehttp(url) {
-    console.log('Client function fetchWebserverEnginehttp working...');
-    
-    try {
-        fetch(`/webserver?url=${url}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(WebserverEnginehttpResult => {
-                console.log('Client result == ' + WebserverEnginehttpResult);
+  console.log("Client function fetchWebserverEnginehttp working...");
 
-                const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
-                const serverHTTPElement = document.getElementById("serverHTTP");
+  try {
+    fetch(`/webserver?url=${url}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.text();
+      })
+      .then((WebserverEnginehttpResult) => {
+        console.log("Client result == " + WebserverEnginehttpResult);
 
-                if (WebserverEnginehttpResult === undefined) {
-                    engineHTTPElement.style.color = "#969d52";
-                    serverHTTPElement.innerText = WebserverEnginehttpResult;
-                } else if (WebserverEnginehttpResult === 'An error occurred.') {
-                    engineHTTPElement.style.color = "red";
-                    serverHTTPElement.innerText = WebserverEnginehttpResult;
-                } else {
-                    engineHTTPElement.style.color = "green";
-                    serverHTTPElement.innerText = WebserverEnginehttpResult;
-                }
-            })
-            .catch(error => {
-                console.error('Webserver Enginehttp Error:', error);
-
-                const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
-                const serverHTTPElement = document.getElementById("serverHTTP");
-
-                engineHTTPElement.style.color = "red";
-                serverHTTPElement.innerText = error;
-            });
-    } catch (error) {
-        console.error('Fetch Error:', error);
         const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
         const serverHTTPElement = document.getElementById("serverHTTP");
+
+        if (WebserverEnginehttpResult === undefined) {
+          engineHTTPElement.style.color = "#969d52";
+          serverHTTPElement.innerText = WebserverEnginehttpResult;
+        } else if (WebserverEnginehttpResult === "An error occurred.") {
+          engineHTTPElement.style.color = "red";
+          serverHTTPElement.innerText = WebserverEnginehttpResult;
+        } else {
+          engineHTTPElement.style.color = "green";
+          serverHTTPElement.innerText = WebserverEnginehttpResult;
+        }
+      })
+      .catch((error) => {
+        console.error("Webserver Enginehttp Error:", error);
+
+        const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
+        const serverHTTPElement = document.getElementById("serverHTTP");
+
         engineHTTPElement.style.color = "red";
-        serverHTTPElement.innerText = 'An error occurred while making the request.';
-    }
+        serverHTTPElement.innerText = error;
+      });
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    const engineHTTPElement = document.getElementById("Engine_HTTP_icon");
+    const serverHTTPElement = document.getElementById("serverHTTP");
+    engineHTTPElement.style.color = "red";
+    serverHTTPElement.innerText = "An error occurred while making the request.";
+  }
 }
