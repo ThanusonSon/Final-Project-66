@@ -1,4 +1,6 @@
-
+// http://www.jokergameth.com/board/
+// https://pantip.com/
+// https://bytex.net/
 
 
 var currentDate = new Date();

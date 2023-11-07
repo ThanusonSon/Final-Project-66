@@ -3,8 +3,26 @@ import time
 import sys
 import json
 import webbrowser
+import requests
 
 print("python ready to run")
+
+# def send_scan_status(scan_completed):
+#     api_url = 'http://localhost:3000/scan-status'  # URL ของ API Endpoint ใน Node.js
+#     data = {'scanCompleted': scan_completed}
+
+#     response = requests.post(api_url, json=data)
+
+#     if response.status_code == 200:
+#         print('Scan status sent successfully.')
+#     else:
+#         print('Failed to send scan status.')
+
+# # เมื่อสแกนเสร็จสิ้น
+
+
+# # เมื่อสแกนยังไม่เสร็จสิ้น
+# # send_scan_status(False)
 
 def fix_url(url):
     if not url.startswith('https://') and not url.startswith('http://'):
@@ -73,6 +91,9 @@ def run_zap_scan(url):
         webbrowser.register('edge', None, webbrowser.BackgroundBrowser(browser_path))
         webbrowser.get('edge').open(file)
 
+
+
+        # send_scan_status(True)
 
 
     except Exception as e:

@@ -113,49 +113,50 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/',function(req,res){
-    express.res.sendFile(path.join(__dirname + '/public/index.html'))
+    res.sendFile(path.join(__dirname + '/public/scan_web_ver.html'))
 })
 
-app.post('/signup',async(req, res)=>{
-    let username = req.body.user_name;
-    let email = req.body.email;
-    let pass = req.body.pass;
+// app.post('/signup',async(req, res)=>{
+//     let username = req.body.user_name;
+//     let email = req.body.email;
+//     let pass = req.body.pass;
 
-    if (username && email && pass){
-        connection.query("INSERT INTO user (username, email, passwd) VALUES (?,?,?)",[username,email,pass],function(error,result,fields){
-            // alert('Signup Success')
-            res.redirect('/index');
-        });
-    }
-});
-app.post('/auth', async(req, res)=> {
-    // console.log('server get sql working...')
-    let sqlreqEmail = req.body.email;
-    let sqlreqPass = req.body.pass;
-    // console.log(sqlreqEmail,'asdasdasdadasdas&&',sqlreqPass);
+//     if (username && email && pass){
+//         connection.query("INSERT INTO user (username, email, passwd) VALUES (?,?,?)",[username,email,pass],function(error,result,fields){
+//             // alert('Signup Success')
+//             res.redirect('/index');
+//         });
+//     }
+// });
+// app.post('/auth', async(req, res)=> {
+//     // console.log('server get sql working...')
+//     let sqlreqEmail = req.body.email;
+//     let sqlreqPass = req.body.pass;
+//     // console.log(sqlreqEmail,'asdasdasdadasdas&&',sqlreqPass);
 
-    if (sqlreqEmail && sqlreqPass){
-        connection.query('SELECT * FROM user WHERE email = ? AND passwd = ?', [sqlreqEmail, sqlreqPass], function(error, results, fields){
-            if (error) throw error;
-            if (results.length > 0){
-                req.session.loggedin = true;
-				req.session.username = sqlreqEmail;
-                res.redirect('/public/scan_web_ver');
-            }else{
-                res.redirect('/index');
+//     if (sqlreqEmail && sqlreqPass){
+//         connection.query('SELECT * FROM user WHERE email = ? AND passwd = ?', [sqlreqEmail, sqlreqPass], function(error, results, fields){
+//             if (error) throw error;
+//             if (results.length > 0){
+//                 req.session.loggedin = true;
+// 				req.session.username = sqlreqEmail;
+//                 res.redirect('/public/scan_web_ver');
+//             }else{
+//                 res.redirect('/index');
                 
-            }
-            res.end();
-        });
-    }else{
-        res.send('Please enter Username and Password!');
-		res.end();
-    }
-});
+//             }
+//             res.end();
+//         });
+//     }else{
+//         res.send('Please enter Username and Password!');
+// 		res.end();
+//     }
+// });
 // res.redirect('/index.html');
-app.get('/index',function(req,res){
-    res.redirect('/index.html');
-});
+// app.get('/index',function(req,res){
+//     res.redirect('/index.html');
+// });
+
 app.get('/public/scan_web_ver',function(req ,res){
     if (req.session.loggedin){
         res.redirect('/scan_web_ver.html');
@@ -270,6 +271,33 @@ app.get('/scanvul', async (req, res) => {
     }
 
 });
+
+app.use(express.json());
+
+app.post('/scan-status', (req, res) => {
+    const { scanCompleted } = req.body;
+
+    if (scanCompleted) {
+        console.log('Scan completed.');
+        // ทำสิ่งที่คุณต้องการทำเมื่อสแกนเสร็จสิ้น
+        res.redirect('/report');
+    } else {
+        console.log('Scan is still in progress.');
+        // ทำสิ่งที่คุณต้องการทำในระหว่างการสแกนที่ยังไม่เสร็จสิ้น
+    }
+
+    res.send('Received scan status.');
+});
+
+app.get('/report',function(req ,res){
+    if (req.session.loggedin){
+        res.sendFile(path.join(__dirname + '/public/python/zap_report.html'))
+    }else{
+        res.send('Please login to view this page!');
+    }
+    res.end();
+});
+
 
 // function runPythonFile() {
 
