@@ -2,6 +2,7 @@ from zapv2 import ZAPv2
 import time
 import sys
 import json
+import os
 import subprocess
 import webbrowser
 from selenium import webdriver
@@ -62,29 +63,18 @@ def run_zap_scan(url):
         json.dump(scan_report, report_file, indent=4) 
     print(f'Scan report saved to: {report_file_name}')
 
-    file = 'http://localhost:3000/report.html'
-    # public\report.html
-    # C:\Users\ratha\Downloads\vulnerability_web\public\report.html
-    browser_path = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
-    webbrowser.register('edge', None, webbrowser.BackgroundBrowser(browser_path))
-    webbrowser.get('edge').open(file)
+    # file = 'http://localhost:3000/report.html'
+    # # public\report.html
+    # # C:\Users\ratha\Downloads\vulnerability_web\public\report.html
+    # browser_path = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
+    # webbrowser.register('edge', None, webbrowser.BackgroundBrowser(browser_path))
+    # webbrowser.get('edge').open(file)
     # driver.get(file)
     # body = driver.find_element("id","scanModal")
     # body.click()
 
 # ระบุคำสั่งที่ใช้ในการเรียก Node.js และส่งไฟล์ JavaScript เป็นอาร์กิวเมนต์
-    # subprocess.run('cd .\myfunction\public\python')
-    # public\python\reface.js
-    # D:\Final Projrct 1_2566\Final-Project-66\public\python
-#     js_file_path = r'.\public\reface.js'
-#     command = ["node", js_file_path]
 
-# # เรียกใช้ Node.js และไฟล์ JavaScript
-#     result=subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-
-# # พิมพ์ผลลัพธ์ที่ได้จากไฟล์ JavaScript
-#     print("รายละเอียดการทำงาน:", result.stdout)
-#     print("ข้อผิดพลาด (ถ้ามี):", result.stderr)
 
 
 if __name__ == "__main__":
