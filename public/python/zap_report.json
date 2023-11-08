@@ -1,56 +1,565 @@
 {
-    "site": "https://www.nkk.ac.th",
+    "site": "https://computing.kku.ac.th/index",
     "alerts": [
         {
-            "pluginid": "10038",
-            "alertRef": "10038-1",
-            "alert": "Content Security Policy (CSP) Header Not Set",
-            "name": "Content Security Policy (CSP) Header Not Set",
+            "pluginid": "10055",
+            "alertRef": "10055-4",
+            "alert": "CSP: Wildcard Directive",
+            "name": "CSP: Wildcard Directive",
             "riskcode": "2",
             "confidence": "3",
             "riskdesc": "Medium (High)",
-            "desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+            "desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
             "instances": [
                 {
-                    "uri": "https://www.nkk.ac.th",
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, form-action\n\nThe directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, form-action\n\nThe directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, form-action\n\nThe directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, form-action\n\nThe directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: \nscript-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, form-action\n\nThe directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything."
+                }
+            ],
+            "count": "5",
+            "solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+            "otherinfo": "<p>The following directives either allow wildcard sources (or ancestors), are not defined, or are overly broadly defined: </p><p>script-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, worker-src, form-action</p><p></p><p>The directive(s): frame-ancestors, form-action are among the directives that do not fallback to default-src, missing/excluding them is the same as allowing anything.</p>",
+            "reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+            "cweid": "693",
+            "wascid": "15",
+            "sourceid": "30675"
+        },
+        {
+            "pluginid": "10055",
+            "alertRef": "10055-5",
+            "alert": "CSP: script-src unsafe-inline",
+            "name": "CSP: script-src unsafe-inline",
+            "riskcode": "2",
+            "confidence": "3",
+            "riskdesc": "Medium (High)",
+            "desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "script-src includes unsafe-inline."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "script-src includes unsafe-inline."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "script-src includes unsafe-inline."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "script-src includes unsafe-inline."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "script-src includes unsafe-inline."
+                }
+            ],
+            "count": "5",
+            "solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+            "otherinfo": "<p>script-src includes unsafe-inline.</p>",
+            "reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+            "cweid": "693",
+            "wascid": "15",
+            "sourceid": "30675"
+        },
+        {
+            "pluginid": "10055",
+            "alertRef": "10055-6",
+            "alert": "CSP: style-src unsafe-inline",
+            "name": "CSP: style-src unsafe-inline",
+            "riskcode": "2",
+            "confidence": "3",
+            "riskdesc": "Medium (High)",
+            "desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "style-src includes unsafe-inline."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "style-src includes unsafe-inline."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "style-src includes unsafe-inline."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "style-src includes unsafe-inline."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "Content-Security-Policy",
+                    "attack": "",
+                    "evidence": "upgrade-insecure-requests",
+                    "otherinfo": "style-src includes unsafe-inline."
+                }
+            ],
+            "count": "5",
+            "solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+            "otherinfo": "<p>style-src includes unsafe-inline.</p>",
+            "reference": "<p>http://www.w3.org/TR/CSP2/</p><p>http://www.w3.org/TR/CSP/</p><p>http://caniuse.com/#search=content+security+policy</p><p>http://content-security-policy.com/</p><p>https://github.com/shapesecurity/salvation</p><p>https://developers.google.com/web/fundamentals/security/csp#policy_applies_to_a_wide_variety_of_resources</p>",
+            "cweid": "693",
+            "wascid": "15",
+            "sourceid": "30675"
+        },
+        {
+            "pluginid": "40035",
+            "alertRef": "40035",
+            "alert": "Hidden File Found",
+            "name": "Hidden File Found",
+            "riskcode": "2",
+            "confidence": "1",
+            "riskdesc": "Medium (Low)",
+            "desc": "<p>A sensitive file was identified as accessible or available. This may leak administrative, configuration, or credential information which can be leveraged by a malicious individual to further attack the system or conduct social engineering efforts.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/._darcs",
                     "method": "GET",
                     "param": "",
+                    "attack": "",
+                    "evidence": "HTTP/1.1 200 OK",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/.bzr",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "HTTP/1.1 200 OK",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/.hg",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "HTTP/1.1 200 OK",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/BitKeeper",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "HTTP/1.1 200 OK",
+                    "otherinfo": ""
+                }
+            ],
+            "count": "4",
+            "solution": "<p>Consider whether or not the component is actually required in production, if it isn't then disable it. If it is then ensure access to it requires appropriate authentication and authorization, or limit exposure to internal systems or specific source IPs, etc.</p>",
+            "otherinfo": "",
+            "reference": "<p>https://blog.hboeck.de/archives/892-Introducing-Snallygaster-a-Tool-to-Scan-for-Secrets-on-Web-Servers.html</p>",
+            "cweid": "538",
+            "wascid": "13",
+            "sourceid": "31060"
+        },
+        {
+            "pluginid": "10020",
+            "alertRef": "10020-1",
+            "alert": "Missing Anti-clickjacking Header",
+            "name": "Missing Anti-clickjacking Header",
+            "riskcode": "2",
+            "confidence": "2",
+            "riskdesc": "Medium (Medium)",
+            "desc": "<p>The response does not include either Content-Security-Policy with 'frame-ancestors' directive or X-Frame-Options to protect against 'ClickJacking' attacks.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "x-frame-options",
                     "attack": "",
                     "evidence": "",
                     "otherinfo": ""
                 },
                 {
-                    "uri": "https://www.nkk.ac.th/",
+                    "uri": "https://computing.kku.ac.th/en/index",
                     "method": "GET",
-                    "param": "",
+                    "param": "x-frame-options",
                     "attack": "",
                     "evidence": "",
                     "otherinfo": ""
                 },
                 {
-                    "uri": "https://www.nkk.ac.th/robots.txt",
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
                     "method": "GET",
-                    "param": "",
+                    "param": "x-frame-options",
                     "attack": "",
                     "evidence": "",
                     "otherinfo": ""
                 },
                 {
-                    "uri": "https://www.nkk.ac.th/sitemap.xml",
+                    "uri": "https://computing.kku.ac.th/index",
                     "method": "GET",
-                    "param": "",
+                    "param": "x-frame-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "x-frame-options",
                     "attack": "",
                     "evidence": "",
                     "otherinfo": ""
                 }
             ],
-            "count": "4",
-            "solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+            "count": "5",
+            "solution": "<p>Modern Web browsers support the Content-Security-Policy and X-Frame-Options HTTP headers. Ensure one of them is set on all web pages returned by your site/app.</p><p>If you expect the page to be framed only by pages on your server (e.g. it's part of a FRAMESET) then you'll want to use SAMEORIGIN, otherwise if you never expect the page to be framed, you should use DENY. Alternatively consider implementing Content Security Policy's \"frame-ancestors\" directive.</p>",
             "otherinfo": "",
-            "reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>http://www.w3.org/TR/CSP/</p><p>http://w3c.github.io/webappsec/specs/content-security-policy/csp-specification.dev.html</p><p>http://www.html5rocks.com/en/tutorials/security/content-security-policy/</p><p>http://caniuse.com/#feat=contentsecuritypolicy</p><p>http://content-security-policy.com/</p>",
-            "cweid": "693",
+            "reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</p>",
+            "cweid": "1021",
             "wascid": "15",
-            "sourceid": "8"
+            "sourceid": "30675"
+        },
+        {
+            "pluginid": "10010",
+            "alertRef": "10010",
+            "alert": "Cookie No HttpOnly Flag",
+            "name": "Cookie No HttpOnly Flag",
+            "riskcode": "1",
+            "confidence": "2",
+            "riskdesc": "Low (Medium)",
+            "desc": "<p>A cookie has been set without the HttpOnly flag, which means that the cookie can be accessed by JavaScript. If a malicious script can be run on this page then the cookie will be accessible and can be transmitted to another site. If this is a session cookie then session hijacking may be possible.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                }
+            ],
+            "count": "6",
+            "solution": "<p>Ensure that the HttpOnly flag is set for all cookies.</p>",
+            "otherinfo": "",
+            "reference": "<p>https://owasp.org/www-community/HttpOnly</p>",
+            "cweid": "1004",
+            "wascid": "13",
+            "sourceid": "30655"
+        },
+        {
+            "pluginid": "10011",
+            "alertRef": "10011",
+            "alert": "Cookie Without Secure Flag",
+            "name": "Cookie Without Secure Flag",
+            "riskcode": "1",
+            "confidence": "2",
+            "riskdesc": "Low (Medium)",
+            "desc": "<p>A cookie has been set without the secure flag, which means that the cookie can be accessed via unencrypted connections.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "i18n_redirected",
+                    "attack": "",
+                    "evidence": "Set-Cookie: i18n_redirected",
+                    "otherinfo": ""
+                }
+            ],
+            "count": "6",
+            "solution": "<p>Whenever a cookie contains sensitive information or is a session token, then it should always be passed using an encrypted channel. Ensure that the secure flag is set for cookies containing such sensitive information.</p>",
+            "otherinfo": "",
+            "reference": "<p>https://owasp.org/www-project-web-security-testing-guide/v41/4-Web_Application_Security_Testing/06-Session_Management_Testing/02-Testing_for_Cookies_Attributes.html</p>",
+            "cweid": "614",
+            "wascid": "13",
+            "sourceid": "30655"
+        },
+        {
+            "pluginid": "10017",
+            "alertRef": "10017",
+            "alert": "Cross-Domain JavaScript Source File Inclusion",
+            "name": "Cross-Domain JavaScript Source File Inclusion",
+            "riskcode": "1",
+            "confidence": "2",
+            "riskdesc": "Low (Medium)",
+            "desc": "<p>The page includes one or more script files from a third-party domain.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "https://kit.fontawesome.com/6335b2a8b1.js",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://kit.fontawesome.com/6335b2a8b1.js\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "https://pdp.kku.ac.th/api/v1/widget",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://pdp.kku.ac.th/api/v1/widget\" type=\"module\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "https://kit.fontawesome.com/6335b2a8b1.js",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://kit.fontawesome.com/6335b2a8b1.js\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "https://pdp.kku.ac.th/api/v1/widget",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://pdp.kku.ac.th/api/v1/widget\" type=\"module\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "https://kit.fontawesome.com/6335b2a8b1.js",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://kit.fontawesome.com/6335b2a8b1.js\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "https://pdp.kku.ac.th/api/v1/widget",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://pdp.kku.ac.th/api/v1/widget\" type=\"module\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "https://kit.fontawesome.com/6335b2a8b1.js",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://kit.fontawesome.com/6335b2a8b1.js\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "https://pdp.kku.ac.th/api/v1/widget",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://pdp.kku.ac.th/api/v1/widget\" type=\"module\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "https://kit.fontawesome.com/6335b2a8b1.js",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://kit.fontawesome.com/6335b2a8b1.js\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "https://pdp.kku.ac.th/api/v1/widget",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://pdp.kku.ac.th/api/v1/widget\" type=\"module\"></script>",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS",
+                    "attack": "",
+                    "evidence": "<script data-n-head=\"ssr\" src=\"https://www.googletagmanager.com/gtag/js?id=G-1RV80PQ7HS\" crossorigin=\"anonymous\"></script>",
+                    "otherinfo": ""
+                }
+            ],
+            "count": "15",
+            "solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
+            "otherinfo": "",
+            "reference": "",
+            "cweid": "829",
+            "wascid": "15",
+            "sourceid": "30675"
         },
         {
             "pluginid": "10035",
@@ -63,31 +572,7 @@
             "desc": "<p>HTTP Strict Transport Security (HSTS) is a web security policy mechanism whereby a web server declares that complying user agents (such as a web browser) are to interact with it using only secure HTTPS connections (i.e. HTTP layered over TLS/SSL). HSTS is an IETF standards track protocol and is specified in RFC 6797.</p>",
             "instances": [
                 {
-                    "uri": "https://www.nkk.ac.th",
-                    "method": "GET",
-                    "param": "",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": ""
-                },
-                {
-                    "uri": "https://www.nkk.ac.th/",
-                    "method": "GET",
-                    "param": "",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": ""
-                },
-                {
-                    "uri": "https://www.nkk.ac.th/robots.txt",
-                    "method": "GET",
-                    "param": "",
-                    "attack": "",
-                    "evidence": "",
-                    "otherinfo": ""
-                },
-                {
-                    "uri": "https://www.nkk.ac.th/sitemap.xml",
+                    "uri": "https://computing.kku.ac.th/robots.txt",
                     "method": "GET",
                     "param": "",
                     "attack": "",
@@ -95,13 +580,353 @@
                     "otherinfo": ""
                 }
             ],
-            "count": "4",
+            "count": "1",
             "solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to enforce Strict-Transport-Security.</p>",
             "otherinfo": "",
             "reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</p><p>https://owasp.org/www-community/Security_Headers</p><p>http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</p><p>http://caniuse.com/stricttransportsecurity</p><p>http://tools.ietf.org/html/rfc6797</p>",
             "cweid": "319",
             "wascid": "15",
-            "sourceid": "8"
+            "sourceid": "30639"
+        },
+        {
+            "pluginid": "10096",
+            "alertRef": "10096",
+            "alert": "Timestamp Disclosure - Unix",
+            "name": "Timestamp Disclosure - Unix",
+            "riskcode": "1",
+            "confidence": "1",
+            "riskdesc": "Low (Low)",
+            "desc": "<p>A timestamp was disclosed by the application/web server - Unix</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/0f55e36.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "1458340928",
+                    "otherinfo": "1458340928, which evaluates to: 2016-03-18 22:42:08"
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/0f55e36.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "1662103108",
+                    "otherinfo": "1662103108, which evaluates to: 2022-09-02 07:18:28"
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/0f55e36.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "1663311030",
+                    "otherinfo": "1663311030, which evaluates to: 2022-09-16 06:50:30"
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/0f55e36.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "1951410728",
+                    "otherinfo": "1951410728, which evaluates to: 2031-11-02 18:32:08"
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/2c571eb.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "1663311030",
+                    "otherinfo": "1663311030, which evaluates to: 2022-09-16 06:50:30"
+                }
+            ],
+            "count": "5",
+            "solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
+            "otherinfo": "<p>1458340928, which evaluates to: 2016-03-18 22:42:08</p>",
+            "reference": "<p>http://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+            "cweid": "200",
+            "wascid": "13",
+            "sourceid": "30662"
+        },
+        {
+            "pluginid": "10021",
+            "alertRef": "10021",
+            "alert": "X-Content-Type-Options Header Missing",
+            "name": "X-Content-Type-Options Header Missing",
+            "riskcode": "1",
+            "confidence": "2",
+            "riskdesc": "Low (Medium)",
+            "desc": "<p>The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. This allows older versions of Internet Explorer and Chrome to perform MIME-sniffing on the response body, potentially causing the response body to be interpreted and displayed as a content type other than the declared content type. Current (early 2014) and legacy versions of Firefox will use the declared content type (if one is set), rather than performing MIME-sniffing.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/0f55e36.js",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/26d052e.js",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/2c571eb.js",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/536d883.js",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/6d280a2.js",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/9a6b9f1.js",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/9b1e868.js",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/c35a003.js",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/img/en.c4fd0f4.png",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/img/facebook.feb47fd.png",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/img/logo2.06d1225.png",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/img/youtube.d6161f6.png",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/favicon.ico",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "x-content-type-options",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": "This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.\nAt \"High\" threshold this scan rule will not alert on client or server error responses."
+                }
+            ],
+            "count": "18",
+            "solution": "<p>Ensure that the application/web server sets the Content-Type header appropriately, and that it sets the X-Content-Type-Options header to 'nosniff' for all web pages.</p><p>If possible, ensure that the end user uses a standards-compliant and modern web browser that does not perform MIME-sniffing at all, or that can be directed by the web application/web server to not perform MIME-sniffing.</p>",
+            "otherinfo": "<p>This issue still applies to error type pages (401, 403, 500, etc.) as those pages are often still affected by injection issues, in which case there is still concern for browsers sniffing pages away from their actual content type.</p><p>At \"High\" threshold this scan rule will not alert on client or server error responses.</p>",
+            "reference": "<p>http://msdn.microsoft.com/en-us/library/ie/gg622941%28v=vs.85%29.aspx</p><p>https://owasp.org/www-community/Security_Headers</p>",
+            "cweid": "693",
+            "wascid": "15",
+            "sourceid": "30662"
+        },
+        {
+            "pluginid": "10027",
+            "alertRef": "10027",
+            "alert": "Information Disclosure - Suspicious Comments",
+            "name": "Information Disclosure - Suspicious Comments",
+            "riskcode": "0",
+            "confidence": "1",
+            "riskdesc": "Informational (Low)",
+            "desc": "<p>The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/26d052e.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "bug",
+                    "otherinfo": "The following pattern was used: \\bBUG\\b and was detected in the element starting with: \"(window.webpackJsonp=window.webpackJsonp||[]).push([[44],{103:function(e,t,o){\"use strict\";Object.defineProperty(t,\"__esModule\",\", see evidence field for the suspicious comment/snippet."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/2c571eb.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "query",
+                    "otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in the element starting with: \"(window.webpackJsonp=window.webpackJsonp||[]).push([[1,10,11,12,13,14,15,16,17,18,19,20,21,25,26,27],{455:function(t,e,n){t.expo\", see evidence field for the suspicious comment/snippet."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/536d883.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "bugs",
+                    "otherinfo": "The following pattern was used: \\bBUGS\\b and was detected in the element starting with: \"(window.webpackJsonp=window.webpackJsonp||[]).push([[5],[function(t,e,n){\"use strict\";function r(t,e,n){return e in t?Object.def\", see evidence field for the suspicious comment/snippet."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/6d280a2.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "bug",
+                    "otherinfo": "The following pattern was used: \\bBUG\\b and was detected in the element starting with: \"(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{467:function(e,t,n){\"use strict\";n.d(t,\"b\",(function(){return r})),n.d(\", see evidence field for the suspicious comment/snippet."
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/_nuxt/c35a003.js",
+                    "method": "GET",
+                    "param": "",
+                    "attack": "",
+                    "evidence": "query",
+                    "otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in the element starting with: \"(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{11:function(t,e,n){\"use strict\";n.d(e,\"k\",(function(){return x})),n.d(e\", see evidence field for the suspicious comment/snippet."
+                }
+            ],
+            "count": "5",
+            "solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
+            "otherinfo": "<p>The following pattern was used: \\bBUG\\b and was detected in the element starting with: \"(window.webpackJsonp=window.webpackJsonp||[]).push([[44],{103:function(e,t,o){\"use strict\";Object.defineProperty(t,\"__esModule\",\", see evidence field for the suspicious comment/snippet.</p>",
+            "reference": "",
+            "cweid": "200",
+            "wascid": "13",
+            "sourceid": "30678"
+        },
+        {
+            "pluginid": "10015",
+            "alertRef": "10015",
+            "alert": "Re-examine Cache-control Directives",
+            "name": "Re-examine Cache-control Directives",
+            "riskcode": "0",
+            "confidence": "1",
+            "riskdesc": "Informational (Low)",
+            "desc": "<p>The cache-control header has not been set properly or is missing, allowing the browser and proxies to cache content. For static assets like css, js, or image files this might be intended, however, the resources should be reviewed to ensure that no sensitive content will be cached.</p>",
+            "instances": [
+                {
+                    "uri": "https://computing.kku.ac.th/en",
+                    "method": "GET",
+                    "param": "cache-control",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/index",
+                    "method": "GET",
+                    "param": "cache-control",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/en/sitemap.xml",
+                    "method": "GET",
+                    "param": "cache-control",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/index",
+                    "method": "GET",
+                    "param": "cache-control",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                },
+                {
+                    "uri": "https://computing.kku.ac.th/sitemap.xml",
+                    "method": "GET",
+                    "param": "cache-control",
+                    "attack": "",
+                    "evidence": "",
+                    "otherinfo": ""
+                }
+            ],
+            "count": "5",
+            "solution": "<p>For secure content, ensure the cache-control HTTP header is set with \"no-cache, no-store, must-revalidate\". If an asset should be cached consider setting the directives \"public, max-age, immutable\".</p>",
+            "otherinfo": "",
+            "reference": "<p>https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html#web-content-caching</p><p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</p><p>https://grayduck.mn/2021/09/13/cache-control-recommendations/</p>",
+            "cweid": "525",
+            "wascid": "13",
+            "sourceid": "30675"
         }
     ],
     "hosts": null,

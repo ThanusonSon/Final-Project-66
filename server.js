@@ -107,7 +107,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function (req, res) {
-  express.res.sendFile(path.join(__dirname + "/public/index.html"));
+  res.sendFile(path.join(__dirname + "/public/index.html"));
 });
 
 app.post("/signup", async (req, res) => {
